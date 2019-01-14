@@ -1,0 +1,15 @@
+.user-status.online {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #7fcd00;
+    display: inline-block;
+}
+
+.user-status.offline {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #ff6600;
+    display: inline-block;
+}
