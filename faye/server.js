@@ -11,7 +11,9 @@ bayeux.addExtension({
         if (url_parts.query.user_id && message.channel === '/meta/connect') {
             users[url_parts.query.user_id] = {
                 user_id: url_parts.query.user_id,
-                client_id: message.clientId
+                client_ids: [
+                    message.clientId
+                ]
             };
         }
         callback(message);
@@ -23,7 +25,7 @@ bayeux.on('subscribe', function (clientId, channel) {
     if (channel === '/connect') {
         var userId = null;
         for (user_id in users) {
-            if (users[user_id].client_id === clientId) {
+            if (users[user_id].client_ids && users[user_id].client_ids.indexOf(clientId) !== -1) {
                 userId = users[user_id].user_id;
             }
         }
@@ -44,15 +46,21 @@ bayeux.on('unsubscribe', function (clientId, channel) {
         var userId = null;
         var client = new faye.Client('http://localhost:8000');
         for (user_id in users) {
-            if (users[user_id].client_id === clientId) {
-                userId = users[user_id].user_id;
-                delete users[user_id];
+            var idx = users[user_id].client_ids.indexOf(clientId);
+            if (idx !== -1) {
+                users[user_id].client_ids.splice(idx, 1);
+                if (users[user_id].client_ids.length === 0) {
+                    userId = users[user_id].user_id;
+                    delete users[user_id];
+                }
             }
         }
-        client.publish('/disconnect', {
-            client_id: clientId,
-            user_id: userId
-        });
+        if (userId) {
+            client.publish('/disconnect', {
+                client_id: clientId,
+                user_id: userId
+            });
+        }
     }
 });
 
