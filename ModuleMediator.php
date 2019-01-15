@@ -28,6 +28,6 @@ class ModuleMediator
 
         $user = $event->getUser();
         $chatUserService = \Yii::$container->get(UserService::class);
-        $chatUserService->addUser($user->getId(), $user->getUsername(), $user->getAvatar());
+        $chatUserService->addUser($user->getUserId(), $user->getUsername(), $user->getAvatar());
     }
 }
