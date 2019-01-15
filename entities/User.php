@@ -34,12 +34,12 @@ class User extends ActiveRecord implements UserInterface
         ];
     }
 
-    public static function create(string $id, string $username, string $avatar = ''): self
+    public static function create(string $id, string $username, ?string $avatar): self
     {
         $user = new self();
         $user->id = $id;
         $user->username = $username;
-        $user->avatar = $avatar ? : null;
+        $user->avatar = $avatar;
         $user->status = self::STATUS_ACTIVE;
         return $user;
     }
@@ -54,9 +54,9 @@ class User extends ActiveRecord implements UserInterface
         return $this->id;
     }
 
-    public function getAvatar(): ?string
+    public function getAvatar(): string
     {
-        return $this->avatar;
+        return $this->avatar ? : \Yii::getAlias('@vendor/krivobokruslan/yii2-faye-chat/src').'/no-avatar.png';
     }
 
     public function getUsername(): string

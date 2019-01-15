@@ -19,7 +19,7 @@ class UserService implements UserServiceInterface
         $this->fayeService = $fayeService;
     }
 
-    public function addUser(string $id, string $username, string $avatar = ''): void
+    public function addUser(string $id, string $username, ?string $avatar): void
     {
         $user = User::create($id, $username, $avatar);
         $this->repository->save($user);
