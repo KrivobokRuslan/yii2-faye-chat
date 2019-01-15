@@ -13,3 +13,17 @@
     background-color: #ff6600;
     display: inline-block;
 }
+
+.user-panel {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+}
+
+.user-row {
+    height: 55px;
+}
+
+#user-container {
+    list-style: none outside none;
+}

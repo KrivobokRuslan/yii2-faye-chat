@@ -6,20 +6,22 @@
 
 \krivobokruslan\fayechat\assets\ChatAssets::register($this);
 ?>
-
-    <ul id="user-container">
-        <li id="user-template" data-user-id="" style="display: none;">
-            <h5 class="username"></h5>
-            <span class="user-status offline"></span>
-            <span class="text-status">Offline</span>
-        </li>
-        <?php foreach ($users as $user) {
-            echo $this->render('_user', [
-                'user' => $user
-            ]);
-        } ?>
-
-    </ul>
+<div class="row">
+    <div class="col-md-4">
+        <ul id="user-container">
+            <li id="user-template" data-user-id="" style="display: none;" class="user-row">
+                <h5 class="username"></h5>
+                <span class="user-status offline"></span>
+                <span class="text-status">Offline</span>
+            </li>
+            <?php foreach ($users as $user) {
+                echo $this->render('_user', [
+                    'user' => $user
+                ]);
+            } ?>
+        </ul>
+    </div>
+</div>
 
 <?php
 $this->registerJsFile('http://localhost:8000/client.js');

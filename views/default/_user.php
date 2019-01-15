@@ -8,8 +8,15 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
 
 ?>
 
-<li id="user-<?php echo $user->getId(); ?>" data-user-id="<?php echo $user->getId(); ?>">
-    <h5 class="username"><img src="<?php echo $user->getAvatar() ? : $bundle->baseUrl . '/img/no-avatar.png'; ?>" width="50px" height="50px"><?php echo $user->getUsername(); ?></h5>
-    <span class="user-status offline"></span>
-    <span class="text-status">Offline</span>
+<li id="user-<?php echo $user->getId(); ?>" data-user-id="<?php echo $user->getId(); ?>" class="user-row">
+    <div class="user-panel">
+        <div class="pull-left image">
+            <img src="<?php echo $user->getAvatar() ? : $bundle->baseUrl . '/img/no-avatar.png'; ?>" width="50px" height="50px">
+        </div>
+        <div class="pull-left info">
+            <p class="username"><?php echo $user->getUsername(); ?></p>
+            <span class="user-status offline"></span>
+            <span class="text-status">Offline</span>
+        </div>
+    </div>
 </li>
