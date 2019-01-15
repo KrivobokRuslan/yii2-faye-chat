@@ -49,7 +49,7 @@ class User extends ActiveRecord implements UserInterface
         return new UserQuery(get_called_class());
     }
 
-    public function getId(): string
+    public function getUserId(): string
     {
         return $this->id;
     }
