@@ -54,9 +54,9 @@ class User extends ActiveRecord implements UserInterface
         return $this->id;
     }
 
-    public function getAvatar(): string
+    public function getAvatar(): ?string
     {
-        return $this->avatar ? : \Yii::getAlias('@vendor/krivobokruslan/yii2-faye-chat/src').'/no-avatar.png';
+        return $this->avatar;
     }
 
     public function getUsername(): string
