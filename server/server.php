@@ -1,16 +1,20 @@
 <?php
 
 use Workerman\Worker;
+use Channel\Server;
+use Channel\Client;
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 $users = [];
 
-$channel_server = new Channel\Server('0.0.0.0', 2206);
+$channel_server = new Server('0.0.0.0', 2206);
 
 $ws_worker = new Worker("websocket://0.0.0.0:8000");
 
 $ws_worker->onWorkerStart = function($worker) use (&$users)
 {
-    Channel\Client::connect('127.0.0.1', 2206);
+    Client::connect('127.0.0.1', 2206);
 
     $inner_tcp_worker = new Worker("tcp://127.0.0.1:1234");
 
@@ -32,7 +36,7 @@ $ws_worker->onConnect = function($connection) use (&$users)
     {
         $users[$_GET['user_id']][$connection->id] = $connection;
         $connection->user = $_GET['user_id'];
-        Channel\Client::publish('new-user', $connection->user);
+        Client::publish('new-user', $connection->user);
     };
 };
 
