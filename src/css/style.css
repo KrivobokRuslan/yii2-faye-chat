@@ -14,6 +14,10 @@
     display: inline-block;
 }
 
+.user-row {
+    cursor: pointer;
+}
+
 .user-panel {
     position: relative;
     width: 100%;
