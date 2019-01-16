@@ -11,7 +11,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
     <div class="row">
         <div class="col-md-4">
             <ul id="user-container" class="list-group">
-                <li id="user-template" data-user-id="" style="display: none;" class="user-row list-group-item">
+                <li id="user-template" data-user-id="" style="display: none;" class="user-row">
                     <div class="user-panel">
                         <div class="pull-left image">
                             <img src="<?php echo $bundle->baseUrl . '/img/no-avatar.png'; ?>" width="50px"
