@@ -3,6 +3,9 @@
  * @var \yii\web\View $this
  * @var int $i
  */
+
+$bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\ChatAssets::class);
+
 ?>
 <div class="direct-chat-msg<?php echo $i == 2 ? ' right' : ''?>">
     <div class="direct-chat-info clearfix">
