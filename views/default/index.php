@@ -31,38 +31,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
             </ul>
         </div>
         <div class="col-md-6" id="dialog-container">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="direct-chat-msg">
-                        <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                            <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-                        </div>
-                        <img class="direct-chat-img" src="<?php echo $bundle->baseUrl . '/img/no-avatar.png'; ?>">
-                        <div class="direct-chat-text">
-                            Is this template really for free? That's unbelievable!
-                        </div>
-                    </div>
-                    <div class="direct-chat-msg right">
-                        <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-name pull-right">Alexander Pierce</span>
-                            <span class="direct-chat-timestamp pull-left">23 Jan 2:00 pm</span>
-                        </div>
-                        <img class="direct-chat-img" src="<?php echo $bundle->baseUrl . '/img/no-avatar.png'; ?>">
-                        <div class="direct-chat-text">
-                            Is this template really for free? That's unbelievable!
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Message...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Send</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
+            <?php echo $this->render('dialog'); ?>
         </div>
     </div>
 
