@@ -96,3 +96,13 @@
     margin-right: 50px;
     margin-left: 0;
 }
+
+.direct-chat-primary .right>.direct-chat-text:after, .direct-chat-primary .right>.direct-chat-text:before {
+    border-left-color: #3c8dbc;
+}
+.right .direct-chat-text:after, .right .direct-chat-text:before {
+    right: auto;
+    left: 100%;
+    border-right-color: transparent;
+    border-left-color: #d2d6de;
+}
