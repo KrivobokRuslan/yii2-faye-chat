@@ -7,15 +7,17 @@ var server = http.createServer(),
     users = {};
 bayeux.addExtension({
     incoming: function (message, request, callback) {
-        var url_parts = url.parse(request.url, true);
-        if (url_parts.query.user_id && !url_parts.query.message && message.channel === '/meta/connect') {
-            if (users[url_parts.query.user_id]) {
-                users[url_parts.query.user_id].client_ids.push(message.clientId);
-            } else {
-                users[url_parts.query.user_id] = {
-                    user_id: url_parts.query.user_id,
-                    client_ids: [message.clientId]
-                };
+        if (request !== null) {
+            var url_parts = url.parse(request.url, true);
+            if (url_parts.query.user_id && !url_parts.query.message && message.channel === '/meta/connect') {
+                if (users[url_parts.query.user_id]) {
+                    users[url_parts.query.user_id].client_ids.push(message.clientId);
+                } else {
+                    users[url_parts.query.user_id] = {
+                        user_id: url_parts.query.user_id,
+                        client_ids: [message.clientId]
+                    };
+                }
             }
         }
         callback(message);
