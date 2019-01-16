@@ -82,3 +82,17 @@
     content: " ";
     display: table;
 }
+
+.right .direct-chat-img {
+    float: right;
+}
+
+.direct-chat-primary .right>.direct-chat-text {
+    background: #3c8dbc;
+    border-color: #3c8dbc;
+    color: #fff;
+}
+.right .direct-chat-text {
+    margin-right: 50px;
+    margin-left: 0;
+}

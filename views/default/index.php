@@ -45,8 +45,8 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                     </div>
                     <div class="direct-chat-msg right">
                         <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                            <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                            <span class="direct-chat-name pull-right">Alexander Pierce</span>
+                            <span class="direct-chat-timestamp pull-left">23 Jan 2:00 pm</span>
                         </div>
                         <img class="direct-chat-img" src="<?php echo $bundle->baseUrl . '/img/no-avatar.png'; ?>">
                         <div class="direct-chat-text">
