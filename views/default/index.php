@@ -56,7 +56,8 @@ $this->registerJs("
     });
     client.subscribe('/new-user', function(data) {
         var template = $('#user-container #user-template').clone().prop('id', 'user-' + data.id).attr('data-user-id', data.id);
-        template.find('h5').text(data.username);
+        template.find('.username').text(data.username);
+        template.find('img').attr('src', data.avatar);
         $('#user-container').append(template);
         template.show();
     });
