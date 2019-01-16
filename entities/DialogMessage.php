@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property string $message
  *
  * @property Dialog $dialog
+ * @property User $author
  */
 
 class DialogMessage extends ActiveRecord
@@ -31,5 +32,10 @@ class DialogMessage extends ActiveRecord
     public function isAuthor($userId): bool
     {
         return $this->author_user_id == $userId;
+    }
+
+    public function getAuthor(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'author_user_id']);
     }
 }
