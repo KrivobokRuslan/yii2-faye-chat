@@ -1,15 +1,18 @@
 <?php
 /**
 * @var \yii\web\View $this
+* @var \krivobokruslan\fayechat\entities\Dialog $dialog
+* @var string $userId
 */
 ?>
 <div class="panel panel-default">
     <div class="panel-body direct-chat-primary">
-        <?php
-            for ($i = 1; $i <=2; $i++) {
-                echo $this->render('_message', ['i' => $i]);?>
-            <?php }
-        ?>
+        <?php foreach ($dialog->messages as $message) {
+            echo $this->render('_message', [
+                'message' => $message,
+                'currentUserId' => $userId
+            ]);
+        }   ?>
     </div>
     <div class="panel-footer">
         <div class="input-group">

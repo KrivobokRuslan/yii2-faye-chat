@@ -31,7 +31,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
             </ul>
         </div>
         <div class="col-md-6" id="dialog-container">
-            <?php echo $this->render('dialog'); ?>
+
         </div>
     </div>
 
