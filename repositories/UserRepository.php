@@ -8,7 +8,7 @@ class UserRepository
 {
     public function findAll()
     {
-        return User::find()->active()->all();
+        return User::find()->active()->notCurrentUser()->all();
     }
 
     public function save(User $user)

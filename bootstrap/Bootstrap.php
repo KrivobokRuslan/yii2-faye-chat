@@ -11,6 +11,7 @@ class Bootstrap implements BootstrapInterface
     {
         $app->getUrlManager()->addRules([
             'chat' => 'faye-chat/default/index',
+            'POST chat/dialog' => 'faye-chat/dialog/create'
         ], false);
 
         $app->setModule('faye-chat', ChatModule::class);
