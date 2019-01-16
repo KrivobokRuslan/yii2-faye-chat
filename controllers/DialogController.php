@@ -25,7 +25,7 @@ class DialogController extends Controller
         if ($form->load(\Yii::$app->request->post(), '') && $form->validate()) {
             try {
                 $dialog = $this->service->create($form, \Yii::$app->user->id);
-                return $this->render('dialog', [
+                return $this->renderPartial('dialog', [
                     'dialog' => $dialog,
                     'currentUserId' => \Yii::$app->user->id
                 ]);
