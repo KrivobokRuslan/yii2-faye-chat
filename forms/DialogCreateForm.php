@@ -13,7 +13,7 @@ class DialogCreateForm extends Model
     {
         return [
             ['user_id', 'required'],
-            ['user_id', 'exists', 'targetClass' => User::class, 'targetAttribute' => 'id'],
+            ['user_id', 'exist', 'targetClass' => User::class, 'targetAttribute' => 'id'],
             ['user_id', 'compare', 'compareValue' => \Yii::$app->user->id, 'operator' => '!=']
         ];
     }
