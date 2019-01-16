@@ -7,7 +7,7 @@
     <div class="panel-body direct-chat-primary">
         <?php
             for ($i = 1; $i <=2; $i++) {
-                echo $this->render('_dialog', ['i' => $i]);?>
+                echo $this->render('_message', ['i' => $i]);?>
             <?php }
         ?>
     </div>
