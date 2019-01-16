@@ -15,4 +15,10 @@ class ChatAssets extends AssetBundle
     public $js = [
         'js/main.js'
     ];
+
+    public $depends = [
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
+        'yii\web\JqueryAsset'
+    ];
 }
