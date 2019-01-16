@@ -2,6 +2,7 @@
 /**
  * @var \yii\web\View $this
  * @var array $users
+ * @var string $fayeHost
  */
 
 \krivobokruslan\fayechat\assets\ChatAssets::register($this);
@@ -36,9 +37,9 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
     </div>
 
 <?php
-$this->registerJsFile('http://localhost:8000/client.js');
+$this->registerJsFile($fayeHost . '/client.js');
 $this->registerJs("
-    var client = new Faye.Client('http://localhost:8000?user_id=" . Yii::$app->user->id . "');
+    var client = new Faye.Client('".$fayeHost."?user_id=" . Yii::$app->user->id . "');
 
     client.subscribe('/connect', function(data) {
         $('#user-' + data.user_id + ' .user-status').removeClass('offline').addClass('online');
@@ -49,6 +50,9 @@ $this->registerJs("
             $('#user-' + data.users[user_id].user_id + ' .user-status').removeClass('offline').addClass('online');
             $('#user-' + data.users[user_id].user_id + ' .text-status').text('Online');
         }
+    });
+    client.subscribe('/dialog/" . Yii::$app->user->id . "/message/add/', function(data) {
+        $('#message-container').append(data);
     });
     client.subscribe('/new-user', function(data) {
         var template = $('#user-container #user-template').clone().prop('id', 'user-' + data.id).attr('data-user-id', data.id);

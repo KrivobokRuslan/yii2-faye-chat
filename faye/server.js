@@ -23,7 +23,7 @@ bayeux.addExtension({
 });
 
 bayeux.on('subscribe', function (clientId, channel) {
-    var client = new faye.Client('http://localhost:8000');
+    var client = bayeux.getClient();
     if (channel === '/connect') {
         var userId = null;
         for (user_id in users) {
@@ -46,7 +46,7 @@ bayeux.on('subscribe', function (clientId, channel) {
 bayeux.on('unsubscribe', function (clientId, channel) {
     if (channel === '/connect') {
         var userId = null;
-        var client = new faye.Client('http://localhost:8000');
+        var client = bayeux.getClient();
         for (user_id in users) {
             var idx = users[user_id].client_ids.indexOf(clientId);
             if (idx !== -1) {

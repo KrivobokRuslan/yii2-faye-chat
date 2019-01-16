@@ -6,8 +6,21 @@ $(document).ready(function(){
             url: '/chat/dialog',
             data: {user_id : userId},
             success: function(res) {
-                $('#dialog-container').append(res);
+                $('#dialog-container').empty().append(res);
             }
         });
+    });
+
+    $('#send-new-message').on('click', function(){
+       var dialogId = $(this).closest('.input-group').find('#dialog-id').val();
+       var message = $(this).closest('.input-group').find('#new-message').val();
+       $.ajax({
+           method: 'post',
+           url: '/faye-chat/dialog/message',
+           data: {
+               dialog_id : dialogId,
+               message: message
+           }
+       });
     });
 });

@@ -6,7 +6,7 @@
 */
 ?>
 <div class="panel panel-default">
-    <div class="panel-body direct-chat-primary">
+    <div class="panel-body direct-chat-primary" id="message-container">
         <?php
         if (!empty($dialog->messages)) {
             foreach ($dialog->messages as $message) {
@@ -22,9 +22,10 @@
     </div>
     <div class="panel-footer">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Message...">
+            <input type="text" class="form-control" placeholder="Message..." id="new-message">
+            <input type="hidden" id="dialog-id" value="<?php echo $dialog->id;?>">
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Send</button>
+                <button class="btn btn-default" type="button" id="send-new-message">Send</button>
             </span>
         </div>
     </div>

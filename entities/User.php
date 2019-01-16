@@ -49,17 +49,17 @@ class User extends ActiveRecord implements UserInterface
         return new UserQuery(get_called_class());
     }
 
-    public function getUserId(): string
+    public function getChatUserId(): string
     {
         return $this->id;
     }
 
-    public function getAvatar(): ?string
+    public function getChatAvatar(): ?string
     {
         return $this->avatar;
     }
 
-    public function getUsername(): string
+    public function getChatUsername(): string
     {
         return $this->username;
     }

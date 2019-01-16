@@ -4,9 +4,9 @@ namespace krivobokruslan\fayechat\interfaces;
 
 interface UserInterface
 {
-    public function getUserId(): string;
+    public function getChatUserId(): string;
 
-    public function getUsername(): string;
+    public function getChatUsername(): string;
 
-    public function getAvatar(): ?string;
+    public function getChatAvatar(): ?string;
 }

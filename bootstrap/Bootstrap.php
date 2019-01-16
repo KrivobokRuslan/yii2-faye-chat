@@ -13,7 +13,5 @@ class Bootstrap implements BootstrapInterface
             'chat' => 'faye-chat/default/index',
             'POST chat/dialog' => 'faye-chat/dialog/create'
         ], false);
-
-        $app->setModule('faye-chat', ChatModule::class);
     }
 }
