@@ -1,4 +1,4 @@
-document.ready(function(){
+$(document).ready(function(){
     $('.user-row').on('click', function(){
         var userId = $(this).attr('data-user-id');
         $.ajax({
