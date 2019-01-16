@@ -4,23 +4,18 @@ use Workerman\Worker;
 use Channel\Server;
 use Channel\Client;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../../../autoload.php';
 
 $users = [];
-
-$channel_server = new Server('0.0.0.0', 2206);
 
 $ws_worker = new Worker("websocket://0.0.0.0:8000");
 
 $ws_worker->onWorkerStart = function($worker) use (&$users)
 {
-    Client::connect('127.0.0.1', 2206);
-
     $inner_tcp_worker = new Worker("tcp://127.0.0.1:1234");
 
     $inner_tcp_worker->onMessage = function($connection, $data) use (&$users) {
         $data = json_decode($data);
-        print_r($data);
         if (isset($users[$data->user])) {
             foreach ($users[$data->user] as $webconnection) {
                 $webconnection->send($data->message);
@@ -36,7 +31,18 @@ $ws_worker->onConnect = function($connection) use (&$users)
     {
         $users[$_GET['user_id']][$connection->id] = $connection;
         $connection->user = $_GET['user_id'];
-        Client::publish('new-user', $connection->user);
+        foreach ($users as $webconnections) {
+            foreach ($webconnections as $webconnection) {
+                $webconnection->send(json_encode([
+                    'event' => 'user-connect',
+                    'user_id' => $connection->user
+                ]));
+            }
+        }
+        $connection->send(json_encode([
+            'event' => 'users-online',
+            'users' => array_keys($users)
+        ]));
     };
 };
 
@@ -44,6 +50,9 @@ $ws_worker->onClose = function($connection) use(&$users)
 {
     if (!isset($connection->user))  return;
     unset($users[$connection->user][$connection->id]);
+    if (empty($users[$connection->user])) {
+        unset($users[$connection->user]);
+    }
 };
 
 Worker::runAll();

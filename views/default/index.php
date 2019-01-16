@@ -40,7 +40,21 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
 
 $this->registerJs("
     ws = new WebSocket('ws://127.0.0.1:8000/?user_id=" . Yii::$app->user->id . "');
-    ws.onmessage = function(evt) {console.log(evt);};
+    ws.onmessage = function(evt) {
+        data = JSON.parse(evt.data);
+        switch(data.event) {
+            case 'user-connect':
+                $('#user-' + data.user_id + ' .user-status').removeClass('offline').addClass('online');
+                $('#user-' + data.user_id + ' .text-status').text('Online');
+                break;
+            case 'users-online':
+                data.users.forEach(function(item, i) {
+                    $('#user-' + item + ' .user-status').removeClass('offline').addClass('online');
+                    $('#user-' + item + ' .text-status').text('Online');
+                });
+                break;
+        }
+    };
 ");
 
 //$this->registerJsFile($fayeHost . '/client.js');
