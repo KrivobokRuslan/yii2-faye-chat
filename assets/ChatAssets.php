@@ -11,4 +11,8 @@ class ChatAssets extends AssetBundle
     public $css = [
         'css/style.css'
     ];
+
+    public $js = [
+        'js/main.js'
+    ];
 }
