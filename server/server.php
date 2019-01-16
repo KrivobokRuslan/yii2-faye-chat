@@ -52,6 +52,14 @@ $ws_worker->onClose = function($connection) use(&$users)
     unset($users[$connection->user][$connection->id]);
     if (empty($users[$connection->user])) {
         unset($users[$connection->user]);
+        foreach ($users as $webconnections) {
+            foreach ($webconnections as $webconnection) {
+                $webconnection->send(json_encode([
+                    'event' => 'user-disconnect',
+                    'user_id' => $connection->user
+                ]));
+            }
+        }
     }
 };
 

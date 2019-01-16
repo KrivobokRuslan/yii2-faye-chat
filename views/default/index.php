@@ -53,6 +53,10 @@ $this->registerJs("
                     $('#user-' + item + ' .text-status').text('Online');
                 });
                 break;
+            case 'user-disconnect':
+                $('#user-' + data.user_id + ' .user-status').removeClass('inline').addClass('offline');
+                $('#user-' + data.user_id + ' .text-status').text('Offline');
+                break;
         }
     };
 ");
