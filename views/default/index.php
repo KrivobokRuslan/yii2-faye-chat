@@ -5,6 +5,7 @@
  */
 
 \krivobokruslan\fayechat\assets\ChatAssets::register($this);
+$bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\ChatAssets::class);
 ?>
     <div class="row">
         <div class="col-md-4">
