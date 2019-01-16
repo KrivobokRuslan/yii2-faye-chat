@@ -19,7 +19,7 @@ class Dialog extends ActiveRecord
 {
     public static function tableName()
     {
-        return '{{%chat-dialogs}}';
+        return '{{%chat_dialogs}}';
     }
 
     public static function create($user_id_one, $user_id_two)
