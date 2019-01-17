@@ -2,9 +2,10 @@
 
 namespace krivobokruslan\fayechat;
 
-use krivobokruslan\fayechat\interfaces\FayeServiceInterface;
+use krivobokruslan\fayechat\interfaces\SocketServiceInterface;
 use krivobokruslan\fayechat\interfaces\UserCreateEventInterface;
-use krivobokruslan\fayechat\services\FayeService;
+use krivobokruslan\fayechat\services\SocketService;
+use krivobokruslan\fayechat\services\WorkerService;
 use krivobokruslan\fayechat\useCases\UserService;
 
 class ModuleMediator
@@ -18,16 +19,16 @@ class ModuleMediator
          * @var UserService $chatUserService
          */
 
-        \Yii::$container->setSingleton(FayeServiceInterface::class, function($app) {
+        \Yii::$container->setSingleton(SocketServiceInterface::class, function($app) {
             /**
              * @var ChatModule $chatModule
              */
             $chatModule = \Yii::$app->getModule('faye-chat');
-            return new FayeService($chatModule->getHost(), $chatModule->getToken());
+            return new WorkerService($chatModule->getHost());
         });
 
         $user = $event->getUser();
         $chatUserService = \Yii::$container->get(UserService::class);
-        $chatUserService->addUser($user->getUserId(), $user->getUsername(), $user->getAvatar());
+        $chatUserService->addUser($user->getChatUserId(), $user->getChatUsername(), $user->getChatAvatar());
     }
 }

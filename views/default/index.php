@@ -43,19 +43,26 @@ $this->registerJs("
     ws.onmessage = function(evt) {
         data = JSON.parse(evt.data);
         switch(data.event) {
-            case 'user-connect':
+            case '/user-connect':
                 $('#user-' + data.user_id + ' .user-status').removeClass('offline').addClass('online');
                 $('#user-' + data.user_id + ' .text-status').text('Online');
                 break;
-            case 'users-online':
+            case '/users-online':
                 data.users.forEach(function(item, i) {
                     $('#user-' + item + ' .user-status').removeClass('offline').addClass('online');
                     $('#user-' + item + ' .text-status').text('Online');
                 });
                 break;
-            case 'user-disconnect':
+            case '/user-disconnect':
                 $('#user-' + data.user_id + ' .user-status').removeClass('inline').addClass('offline');
                 $('#user-' + data.user_id + ' .text-status').text('Offline');
+                break;
+            case '/user-signup':
+                var template = $('#user-container #user-template').clone().prop('id', 'user-' + data.id).attr('data-user-id', data.id);
+                template.find('.username').text(data.username);
+                template.find('img').attr('src', data.avatar);
+                $('#user-container').append(template);
+                template.show();
                 break;
         }
     };

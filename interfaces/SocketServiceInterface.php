@@ -2,7 +2,7 @@
 
 namespace krivobokruslan\fayechat\interfaces;
 
-interface FayeServiceInterface
+interface SocketServiceInterface
 {
     public function send(string $channel, array $data = []): void;
 }

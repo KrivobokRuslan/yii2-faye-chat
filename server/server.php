@@ -18,7 +18,7 @@ $ws_worker->onWorkerStart = function($worker) use (&$users)
         $data = json_decode($data);
         if (isset($users[$data->user])) {
             foreach ($users[$data->user] as $webconnection) {
-                $webconnection->send($data->message);
+                $webconnection->send($data);
             }
         }
     };
@@ -34,13 +34,13 @@ $ws_worker->onConnect = function($connection) use (&$users)
         foreach ($users as $webconnections) {
             foreach ($webconnections as $webconnection) {
                 $webconnection->send(json_encode([
-                    'event' => 'user-connect',
+                    'event' => '/user-connect',
                     'user_id' => $connection->user
                 ]));
             }
         }
         $connection->send(json_encode([
-            'event' => 'users-online',
+            'event' => '/users-online',
             'users' => array_keys($users)
         ]));
     };
@@ -55,7 +55,7 @@ $ws_worker->onClose = function($connection) use(&$users)
         foreach ($users as $webconnections) {
             foreach ($webconnections as $webconnection) {
                 $webconnection->send(json_encode([
-                    'event' => 'user-disconnect',
+                    'event' => '/user-disconnect',
                     'user_id' => $connection->user
                 ]));
             }

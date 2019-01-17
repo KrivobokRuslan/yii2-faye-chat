@@ -2,11 +2,11 @@
 
 namespace krivobokruslan\fayechat\services;
 
-use krivobokruslan\fayechat\interfaces\FayeServiceInterface;
+use krivobokruslan\fayechat\interfaces\SocketServiceInterface;
 use Nc\FayeClient\Adapter\CurlAdapter;
 use Nc\FayeClient\Client;
 
-class FayeService implements FayeServiceInterface
+class SocketService implements SocketServiceInterface
 {
 
     private $client;
