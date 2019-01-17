@@ -12,12 +12,12 @@ class ServerController extends Controller
 
     private $users = [];
 
-    public function actionStart()
+    public function actionStart($ws_host = 'websocket://0.0.0.0:8000', $tcp_host = 'tcp://127.0.0.1:1234')
     {
-        $ws_worker = new Worker("websocket://0.0.0.0:8000");
-        $ws_worker->onWorkerStart = function($worker) use (&$users)
+        $ws_worker = new Worker($ws_host);
+        $ws_worker->onWorkerStart = function($worker) use (&$users, $tcp_host)
         {
-            $inner_tcp_worker = new Worker("tcp://127.0.0.1:1234");
+            $inner_tcp_worker = new Worker($tcp_host);
 
             $inner_tcp_worker->onMessage = function($connection, $data) use (&$users) {
                 $data = json_decode($data);
