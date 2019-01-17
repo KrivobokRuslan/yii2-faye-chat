@@ -44,10 +44,10 @@ class ServerController extends Controller
                 $connection->user = $_GET['user_id'];
                 foreach ($users as $webconnections) {
                     foreach ($webconnections as $webconnection) {
-                        $webconnection->send(UserConnectMessage::createAsJson('/user-connect', $connection->user));
+                        $webconnection->send(UserConnectMessage::createAsJson('userConnect', $connection->user));
                     }
                 }
-                $connection->send(UsersOnlineMessage::createAsJson('/users-online', array_keys($users)));
+                $connection->send(UsersOnlineMessage::createAsJson('usersOnline', array_keys($users)));
             };
         };
 
@@ -59,7 +59,7 @@ class ServerController extends Controller
                 unset($users[$connection->user]);
                 foreach ($users as $webconnections) {
                     foreach ($webconnections as $webconnection) {
-                        $webconnection->send(UserConnectMessage::createAsJson('/user-disconnect', $connection->user));
+                        $webconnection->send(UserConnectMessage::createAsJson('userDisconnect', $connection->user));
                     }
                 }
             }
