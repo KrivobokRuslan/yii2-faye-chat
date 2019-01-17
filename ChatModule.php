@@ -8,13 +8,13 @@ class ChatModule extends Module
 {
     public $controllerNamespace = 'krivobokruslan\fayechat\controllers';
 
-    public $fayeHost = 'http://localhost:8000';
+    public $host = 'tcp://127.0.0.1:1234';
 
     private $token = 'secret-faye-token';
 
     public function getHost()
     {
-        return $this->fayeHost;
+        return $this->host;
     }
 
     public function getToken()
