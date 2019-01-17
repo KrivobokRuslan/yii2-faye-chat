@@ -22,8 +22,8 @@ class UserService implements UserServiceInterface
 
     public function addUser(UserInterface $user): User
     {
-        if ($user = $this->repository->findUser($user->getChatUserId())) {
-            return $user;
+        if ($existUser = $this->repository->findUser($user->getChatUserId())) {
+            return $existUser;
         }
         $user = User::create($user->getChatUserId(), $user->getChatUsername(), $user->getChatAvatar());
         $this->repository->save($user);
