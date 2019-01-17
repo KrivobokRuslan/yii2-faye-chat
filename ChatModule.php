@@ -2,6 +2,8 @@
 
 namespace krivobokruslan\fayechat;
 
+use krivobokruslan\fayechat\interfaces\SocketServiceInterface;
+use krivobokruslan\fayechat\services\WorkerService;
 use yii\base\Module;
 
 class ChatModule extends Module
@@ -15,6 +17,14 @@ class ChatModule extends Module
     public $client_host = 'ws://127.0.0.1:8000';
 
     private $token = 'secret-faye-token';
+
+    public function init()
+    {
+        parent::init();
+        \Yii::$container->setSingleton(SocketServiceInterface::class, function($app) {
+            return new WorkerService($this->getTcpHost());
+        });
+    }
 
     public function getTcpHost()
     {
