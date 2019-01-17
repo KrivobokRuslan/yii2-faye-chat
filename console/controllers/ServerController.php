@@ -15,18 +15,18 @@ class ServerController extends Controller
     public function actionStart($ws_host = "websocket://0.0.0.0:8000", $tcp_host = "tcp://127.0.0.1:1234")
     {
         $ws_worker = new Worker($ws_host);
-        $ws_worker->onWorkerStart = function($worker) use (&$users, $tcp_host)
+        $ws_worker->onWorkerStart = function($worker) use ($tcp_host)
         {
             $inner_tcp_worker = new Worker($tcp_host);
 
-            $inner_tcp_worker->onMessage = function($connection, $data) use (&$users) {
+            $inner_tcp_worker->onMessage = function($connection, $data) {
                 $data = json_decode($data);
-                if (property_exists($data, 'userId') && isset($users[$data->userId])) {
-                    foreach ($users[$data->userId] as $webconnection) {
+                if (property_exists($data, 'userId') && isset($this->users[$data->userId])) {
+                    foreach ($this->users[$data->userId] as $webconnection) {
                         $webconnection->send($data);
                     }
                 } else {
-                    foreach ($users as $webconnections) {
+                    foreach ($this->users as $webconnections) {
                         foreach ($webconnections as $webconnection) {
                             $webconnection->send(json_encode($data));
                         }
@@ -36,28 +36,28 @@ class ServerController extends Controller
             $inner_tcp_worker->listen();
         };
 
-        $ws_worker->onConnect = function($connection) use (&$users)
+        $ws_worker->onConnect = function($connection)
         {
-            $connection->onWebSocketConnect = function($connection) use (&$users)
+            $connection->onWebSocketConnect = function($connection)
             {
-                $users[$_GET['user_id']][$connection->id] = $connection;
+                $this->users[$_GET['user_id']][$connection->id] = $connection;
                 $connection->user = $_GET['user_id'];
-                foreach ($users as $webconnections) {
+                foreach ($this->users as $webconnections) {
                     foreach ($webconnections as $webconnection) {
                         $webconnection->send(UserConnectMessage::createAsJson('userConnect', $connection->user));
                     }
                 }
-                $connection->send(UsersOnlineMessage::createAsJson('usersOnline', array_keys($users)));
+                $connection->send(UsersOnlineMessage::createAsJson('usersOnline', array_keys($this->users)));
             };
         };
 
-        $ws_worker->onClose = function($connection) use(&$users)
+        $ws_worker->onClose = function($connection)
         {
             if (!isset($connection->user))  return;
-            unset($users[$connection->user][$connection->id]);
-            if (empty($users[$connection->user])) {
-                unset($users[$connection->user]);
-                foreach ($users as $webconnections) {
+            unset($this->users[$connection->user][$connection->id]);
+            if (empty($this->users[$connection->user])) {
+                unset($this->users[$connection->user]);
+                foreach ($this->users as $webconnections) {
                     foreach ($webconnections as $webconnection) {
                         $webconnection->send(UserConnectMessage::createAsJson('userDisconnect', $connection->user));
                     }

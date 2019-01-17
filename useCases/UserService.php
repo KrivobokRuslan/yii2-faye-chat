@@ -19,11 +19,12 @@ class UserService implements UserServiceInterface
         $this->socketService = $socketService;
     }
 
-    public function addUser(string $id, string $username, ?string $avatar): void
+    public function addUser(string $id, string $username, ?string $avatar): User
     {
         $user = User::create($id, $username, $avatar);
         $this->repository->save($user);
         $this->socketService->send('', ['event' => 'userSignup', 'user' => $user->toArray()]);
+        return $user;
     }
 
     public function removeUser(string $id): void

@@ -7,13 +7,18 @@ use yii\db\ActiveQuery;
 
 class UserQuery extends ActiveQuery
 {
-    public function active()
+    public function active(): ActiveQuery
     {
         return $this->andWhere(['status' => User::STATUS_ACTIVE]);
     }
 
-    public function notCurrentUser()
+    public function notCurrentUser(): ActiveQuery
     {
         return $this->andWhere(['!=', 'id', \Yii::$app->user->id]);
+    }
+
+    public function current(): ActiveQuery
+    {
+        return $this->active()->andFilterWhere(['id' => \Yii::$app->user->id]);
     }
 }
