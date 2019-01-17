@@ -32,7 +32,7 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        $user = $this->userService->addUser($this->module->getAuthUser());
+        $user = $this->userService->addUser($this->module->getUser());
 
         return $this->render('index', [
             'user' => $user,
