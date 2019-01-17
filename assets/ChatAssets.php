@@ -13,7 +13,8 @@ class ChatAssets extends AssetBundle
     ];
 
     public $js = [
-        'js/main.js'
+        'js/main.js',
+        'js/websocket-handler.js'
     ];
 
     public $depends = [

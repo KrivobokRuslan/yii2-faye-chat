@@ -39,8 +39,8 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
 <?php
 
 $this->registerJs("
-    ws = new WebSocket('".$clientHost."/?user_id=" . Yii::$app->user->id . "');
-    chat_module_bundle = '".$bundle->baseUrl."';
+    var ws = new WebSocket('".$clientHost."/?user_id=" . Yii::$app->user->id . "');
+    var chat_module_bundle = '".$bundle->baseUrl."';
 ", \yii\web\View::POS_BEGIN);
 
 //$this->registerJsFile($fayeHost . '/client.js');
