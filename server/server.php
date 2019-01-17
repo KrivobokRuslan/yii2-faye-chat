@@ -1,8 +1,8 @@
 <?php
 
 use Workerman\Worker;
-use Channel\Server;
-use Channel\Client;
+use krivobokruslan\fayechat\server\messages\UserConnectMessage;
+use krivobokruslan\fayechat\server\messages\UsersOnlineMessage;
 
 require_once __DIR__ . '/../../../autoload.php';
 
@@ -39,16 +39,10 @@ $ws_worker->onConnect = function($connection) use (&$users)
         $connection->user = $_GET['user_id'];
         foreach ($users as $webconnections) {
             foreach ($webconnections as $webconnection) {
-                $webconnection->send(json_encode([
-                    'event' => '/user-connect',
-                    'user_id' => $connection->user
-                ]));
+                $webconnection->send(UserConnectMessage::createAsJson('/user-connect', $connection->user));
             }
         }
-        $connection->send(json_encode([
-            'event' => '/users-online',
-            'users' => array_keys($users)
-        ]));
+        $connection->send(UsersOnlineMessage::createAsJson('/users-online', array_keys($users)));
     };
 };
 
@@ -60,10 +54,7 @@ $ws_worker->onClose = function($connection) use(&$users)
         unset($users[$connection->user]);
         foreach ($users as $webconnections) {
             foreach ($webconnections as $webconnection) {
-                $webconnection->send(json_encode([
-                    'event' => '/user-disconnect',
-                    'user_id' => $connection->user
-                ]));
+                $webconnection->send(UserConnectMessage::createAsJson('/user-disconnect', $connection->user));
             }
         }
     }

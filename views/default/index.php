@@ -60,7 +60,7 @@ $this->registerJs("
             case '/user-signup':
                 var template = $('#user-container #user-template').clone().prop('id', 'user-' + data.data.id).attr('data-user-id', data.data.id);
                 template.find('.username').text(data.data.username);
-                template.find('img').attr('src', data.data.avatar);
+                template.find('img').attr('src', data.data.avatar ? : '".$bundle->baseUrl . '/img/no-avatar.png'."');
                 $('#user-container').append(template);
                 template.show();
                 break;
