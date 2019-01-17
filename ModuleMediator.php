@@ -24,7 +24,7 @@ class ModuleMediator
              * @var ChatModule $chatModule
              */
             $chatModule = \Yii::$app->getModule('faye-chat');
-            return new WorkerService($chatModule->getHost());
+            return new WorkerService($chatModule->getTcpHost());
         });
 
         $user = $event->getUser();
