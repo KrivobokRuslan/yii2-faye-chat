@@ -16,7 +16,7 @@ $ws_worker->onWorkerStart = function($worker) use (&$users)
 
     $inner_tcp_worker->onMessage = function($connection, $data) use (&$users) {
         $data = json_decode($data);
-        if ($data->user && isset($users[$data->user])) {
+        if (isset($data['user']) && isset($users[$data->user])) {
             foreach ($users[$data->user] as $webconnection) {
                 $webconnection->send($data);
             }

@@ -58,6 +58,7 @@ $this->registerJs("
                 $('#user-' + data.user_id + ' .text-status').text('Offline');
                 break;
             case '/user-signup':
+                console.log(data);
                 var template = $('#user-container #user-template').clone().prop('id', 'user-' + data.id).attr('data-user-id', data.id);
                 template.find('.username').text(data.username);
                 template.find('img').attr('src', data.avatar);
