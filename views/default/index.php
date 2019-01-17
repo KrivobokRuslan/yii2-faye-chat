@@ -2,7 +2,7 @@
 /**
  * @var \yii\web\View $this
  * @var array $users
- * @var string $fayeHost
+ * @var string $clientHost
  */
 
 \krivobokruslan\fayechat\assets\ChatAssets::register($this);
@@ -39,7 +39,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
 <?php
 
 $this->registerJs("
-    ws = new WebSocket('ws://127.0.0.1:8000/?user_id=" . Yii::$app->user->id . "');
+    ws = new WebSocket('".$clientHost."/?user_id=" . Yii::$app->user->id . "');
     ws.onmessage = function(evt) {
         data = JSON.parse(evt.data);
         switch(data.event) {

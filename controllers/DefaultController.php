@@ -27,7 +27,7 @@ class DefaultController extends Controller
     {
         return $this->render('index', [
             'users' => $this->service->list(),
-            'fayeHost' => $this->module->getHost()
+            'clientHost' => $this->module->getClientHost()
         ]);
     }
 }
