@@ -1,8 +1,8 @@
 {
     "name": "krivobokruslan/yii2-faye-chat",
-    "description": "Yii2 real time chat based on Faye",
+    "description": "Yii2 real time chat based on WebSocket (workerman)",
     "type": "yii2-extension",
-    "keywords": ["yii2","faye","chat"],
+    "keywords": ["yii2", "chat"],
     "license": "MIT",
     "authors": [
         {
@@ -14,8 +14,7 @@
         "php": ">=7.2.0",
         "yiisoft/yii2": "~2.0.0",
         "nc/faye-client": "~1.0",
-        "workerman/workerman": "^3.5",
-        "workerman/channel": "^1.0"
+        "workerman/workerman": "^3.5"
     },
     "autoload": {
         "psr-4": {
