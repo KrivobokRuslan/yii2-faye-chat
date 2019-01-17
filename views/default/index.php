@@ -40,34 +40,8 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
 
 $this->registerJs("
     ws = new WebSocket('".$clientHost."/?user_id=" . Yii::$app->user->id . "');
-    ws.onmessage = function(evt) {
-        data = JSON.parse(evt.data);
-        switch(data.event) {
-            case '/user-connect':
-                $('#user-' + data.user_id + ' .user-status').removeClass('offline').addClass('online');
-                $('#user-' + data.user_id + ' .text-status').text('Online');
-                break;
-            case '/users-online':
-                data.users.forEach(function(item, i) {
-                    $('#user-' + item + ' .user-status').removeClass('offline').addClass('online');
-                    $('#user-' + item + ' .text-status').text('Online');
-                });
-                break;
-            case '/user-disconnect':
-                $('#user-' + data.user_id + ' .user-status').removeClass('inline').addClass('offline');
-                $('#user-' + data.user_id + ' .text-status').text('Offline');
-                break;
-            case '/user-signup':
-                var template = $('#user-container #user-template').clone().prop('id', 'user-' + data.data.id).attr('data-user-id', data.data.id);
-                var avatarUrl = data.data.avatar ? data.data.avatar : '".$bundle->baseUrl . '/img/no-avatar.png'."'
-                template.find('.username').text(data.data.username);
-                template.find('img').attr('src', avatarUrl);
-                $('#user-container').append(template);
-                template.show();
-                break;
-        }
-    };
-");
+    chat_module_bundle = '".$bundle->baseUrl."';
+", \yii\web\View::POS_BEGIN);
 
 //$this->registerJsFile($fayeHost . '/client.js');
 //$this->registerJs("
