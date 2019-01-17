@@ -5,8 +5,9 @@ namespace krivobokruslan\fayechat\console\controllers;
 use krivobokruslan\fayechat\server\messages\UserConnectMessage;
 use krivobokruslan\fayechat\server\messages\UsersOnlineMessage;
 use Workerman\Worker;
+use yii\console\Controller;
 
-class ServerController
+class ServerController extends Controller
 {
 
     private $users = [];
