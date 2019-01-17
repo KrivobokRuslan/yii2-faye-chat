@@ -12,6 +12,11 @@ class UserQuery extends ActiveQuery
         return $this->andWhere(['status' => User::STATUS_ACTIVE]);
     }
 
+    public function byId($id): ActiveQuery
+    {
+        return $this->andWhere(['id' => $id]);
+    }
+
     public function notCurrentUser(): ActiveQuery
     {
         return $this->andWhere(['!=', 'id', \Yii::$app->user->id]);

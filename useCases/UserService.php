@@ -4,6 +4,7 @@ namespace krivobokruslan\fayechat\useCases;
 
 use krivobokruslan\fayechat\entities\User;
 use krivobokruslan\fayechat\interfaces\SocketServiceInterface;
+use krivobokruslan\fayechat\interfaces\UserInterface;
 use krivobokruslan\fayechat\interfaces\UserServiceInterface;
 use krivobokruslan\fayechat\repositories\UserRepository;
 
@@ -19,9 +20,12 @@ class UserService implements UserServiceInterface
         $this->socketService = $socketService;
     }
 
-    public function addUser(string $id, string $username, ?string $avatar): User
+    public function addUser(UserInterface $user): User
     {
-        $user = User::create($id, $username, $avatar);
+        if ($user = $this->repository->findUser($user->getChatUserId())) {
+            return $user;
+        }
+        $user = User::create($user->getChatUserId(), $user->getChatUsername(), $user->getChatAvatar());
         $this->repository->save($user);
         $this->socketService->send('', ['event' => 'userSignup', 'user' => $user->toArray()]);
         return $user;

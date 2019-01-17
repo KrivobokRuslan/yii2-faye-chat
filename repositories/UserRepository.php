@@ -6,11 +6,10 @@ use krivobokruslan\fayechat\entities\User;
 
 class UserRepository
 {
-    public function findCurrentUser($id): ?User
+    public function findUser($id): ?User
     {
-        return User::find()->current()->one();
+        return User::find()->active()->byId($id)->one();
     }
-
 
     public function findAll(): ?array
     {

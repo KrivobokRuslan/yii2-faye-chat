@@ -7,7 +7,7 @@ use krivobokruslan\fayechat\useCases\DialogService;
 use yii\base\Module;
 use yii\web\Controller;
 
-class DialogController extends Controller
+class DialogController extends MainController
 {
 
     private $service;
@@ -30,7 +30,7 @@ class DialogController extends Controller
                     'currentUserId' => \Yii::$app->user->id
                 ]);
             } catch (\DomainException $e) {
-
+                return $this->setErrorStatus($e->getMessage());
             }
         }
     }

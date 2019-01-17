@@ -3,6 +3,7 @@
 namespace krivobokruslan\fayechat;
 
 use krivobokruslan\fayechat\interfaces\SocketServiceInterface;
+use krivobokruslan\fayechat\interfaces\UserInterface;
 use krivobokruslan\fayechat\services\WorkerService;
 use yii\base\Module;
 
@@ -18,31 +19,45 @@ class ChatModule extends Module
 
     private $token = 'secret-faye-token';
 
+    private $authUser;
+
     public function init()
     {
         parent::init();
+
         \Yii::$container->setSingleton(SocketServiceInterface::class, function($app) {
             return new WorkerService($this->getTcpHost());
         });
+
+        $this->authUser = \Yii::$app->user->getIdentity();
+
+        if (!($this->authUser instanceof UserInterface)) {
+            throw new \DomainException('Your Identity class must implements ' . UserInterface::class);
+        }
     }
 
-    public function getTcpHost()
+    public function getTcpHost(): string
     {
         return $this->tcp_host;
     }
 
-    public function getWsHost()
+    public function getWsHost(): string
     {
         return $this->ws_host;
     }
 
-    public function getClientHost()
+    public function getClientHost(): string
     {
         return $this->client_host;
     }
 
-    public function getToken()
+    public function getToken(): string
     {
         return $this->token;
+    }
+
+    public function getUser(): UserInterface
+    {
+        return $this->authUser;
     }
 }

@@ -25,6 +25,9 @@ class m190113_141521_add_chat_module_tables extends Migration
             'user_id_two' => $this->integer()->notNull()
         ]);
 
+        $this->addForeignKey('chat_dialog_user_id_two_fk', '{{%chat_dialogs}}', 'user_id_one', '{{%chat_users}}', 'id', 'CASCADE', 'RESTRICT');
+        $this->addForeignKey('chat_dialog_user_id_one_fk', '{{%chat_dialogs}}', 'user_id_two', '{{%chat_users}}', 'id', 'CASCADE', 'RESTRICT');
+
         $this->createTable('{{%chat_dialog_messages}}', [
             'id' => $this->primaryKey(),
             'author_user_id' => $this->integer()->notNull(),
