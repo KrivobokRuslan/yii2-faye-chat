@@ -59,8 +59,9 @@ $this->registerJs("
                 break;
             case '/user-signup':
                 var template = $('#user-container #user-template').clone().prop('id', 'user-' + data.data.id).attr('data-user-id', data.data.id);
+                var avatarUrl = data.data.avatar ? data.data.avatar : '".$bundle->baseUrl . '/img/no-avatar.png'."'
                 template.find('.username').text(data.data.username);
-                template.find('img').attr('src', data.data.avatar ? : '".$bundle->baseUrl . '/img/no-avatar.png'."');
+                template.find('img').attr('src', avatarUrl);
                 $('#user-container').append(template);
                 template.show();
                 break;
