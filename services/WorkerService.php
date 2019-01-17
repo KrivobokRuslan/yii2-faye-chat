@@ -18,6 +18,6 @@ class WorkerService implements SocketServiceInterface
     {
         $instance = stream_socket_client($this->host);
 
-        fwrite($instance, json_encode(['event' => $channel, 'message' => $data, 'user' => $data['id']])  . "\n");
+        fwrite($instance, json_encode($data)  . "\n");
     }
 }
