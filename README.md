@@ -65,7 +65,7 @@ or use your own event handler by example of
 
 - Your Identity class must implements <code>krivobokruslan\fayechat\interfaces\UserInterface</code>
 
-- Run <code>./yii migrate --migrationPath=krivobokruslan\yii2-faye-chat\migrations<.code>
+- Run <code>./yii migrate --migrationPath=krivobokruslan\yii2-faye-chat\migrations</code>
 
 Run server
 -----
@@ -74,6 +74,13 @@ Run command ./yii server/start [string $ws_host] [string $tcp_host] </code>
 
 Usage
 -----
+For automatically adding users to chat database trigger 
+
+<code>krivobokruslan\fayechat\interfaces\UserCreateEventInterface</code> 
+
+when your user was created
+
+<code>Yii::$app->trigger('userCreate', new UserCreateEvent($user));</code>
 
 Visit <code>/chat</code> url, your currently logged in user will automatically added to chat. All new users, if You subscribe and handle userCreate event will automatically added to chat and changes will be show to all connected users
 
