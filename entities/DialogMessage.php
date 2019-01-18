@@ -56,7 +56,7 @@ class DialogMessage extends ActiveRecord
             'author' => [
                 'username' => $this->author->getChatUsername(),
                 'avatar' => $this->author->getChatAvatar(),
-                'id' => $this->author->getChatAvatar()
+                'id' => $this->author->getChatUserId()
             ],
             'dialog_id' => $this->dialog_id
         ];

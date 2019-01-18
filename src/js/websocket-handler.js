@@ -23,13 +23,10 @@
             template.show();
         },
         newMessage : function(data) {
-            console.log(data);
             var dialogElem = $('#dialog-' + data.message.dialog_id);
             if (!isEmpty(dialogElem)) {
                 dialogElem.find('#message-container').append(renderMessage(data.message));
             } else {
-                console.log(data.message.author.id);
-                console.log($('#user-' + data.message.author.id).find('.income-message'));
                 $('#user-' + data.message.author.id).find('.income-message').show();
                 playAudio();
             }
