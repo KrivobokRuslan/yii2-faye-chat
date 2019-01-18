@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('.user-row').on('click', function(){
+    $(document).on('click', '.user-row', function(){
         var userId = $(this).attr('data-user-id');
         $.ajax({
             method: 'post',
@@ -11,7 +11,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#send-new-message').on('click', function(){
+    $(document).on('click', '#send-new-message', function(){
        var dialogId = $(this).closest('.input-group').find('#dialog-id').val();
        var message = $(this).closest('.input-group').find('#new-message').val();
        $.ajax({
