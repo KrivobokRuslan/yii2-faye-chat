@@ -2,6 +2,7 @@
 
 namespace krivobokruslan\fayechat\entities;
 
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -12,6 +13,8 @@ use yii\db\ActiveRecord;
  * @property integer $author_user_id
  * @property integer $dialog_id
  * @property string $message
+ * @property integer $created_at
+ * @property integer $updated_at
  *
  * @property Dialog $dialog
  * @property User $author
@@ -22,6 +25,16 @@ class DialogMessage extends ActiveRecord
     public static function tableName()
     {
         return '{{%chat_dialog_messages}}';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+        ];
     }
 
     public static function create($authorId, $dialogId, $text): self
@@ -58,7 +71,8 @@ class DialogMessage extends ActiveRecord
                 'avatar' => $this->author->getChatAvatar(),
                 'id' => $this->author->getChatUserId()
             ],
-            'dialog_id' => $this->dialog_id
+            'dialog_id' => $this->dialog_id,
+            'created_at' => date('Y-m-d H:i:s', $this->created_at)
         ];
     }
 }

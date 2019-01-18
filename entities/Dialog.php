@@ -3,6 +3,7 @@
 namespace krivobokruslan\fayechat\entities;
 
 use krivobokruslan\fayechat\queries\DialogQuery;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -12,6 +13,8 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property integer $user_id_one
  * @property integer $user_id_two
+ * @property integer $created_at
+ * @property integer $updated_at
  *
  * @property DialogMessage[] $messages
  */
@@ -21,6 +24,16 @@ class Dialog extends ActiveRecord
     public static function tableName()
     {
         return '{{%chat_dialogs}}';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+        ];
     }
 
     public static function create($user_id_one, $user_id_two)
