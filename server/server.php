@@ -18,7 +18,7 @@ $ws_worker->onWorkerStart = function($worker) use (&$users)
         $data = json_decode($data);
         if (property_exists($data, 'userId') && isset($users[$data->user])) {
             foreach ($users[$data->user] as $webconnection) {
-                $webconnection->send($data);
+                $webconnection->send(json_encode($data));
             }
         } else {
             foreach ($users as $webconnections) {
