@@ -27,7 +27,7 @@
             if (!isEmpty(dialogElem)) {
                 dialogElem.find('#message-container').append(renderMessage(data.message));
             } else {
-                $('#user-' + data.message.author.id).find('#income-message-user' + data.message.author.id).show();
+                $('#user-' + data.message.author.id).find('#income-message-user-' + data.message.author.id).show();
                 playAudio();
             }
         }
