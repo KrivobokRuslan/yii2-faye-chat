@@ -14,7 +14,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
             <img src="<?php echo $user->getChatAvatar() ? : $bundle->baseUrl . '/img/no-avatar.png'; ?>" width="50px" height="50px">
         </div>
         <div class="pull-left info">
-            <p><span class="username"><?php echo $user->getChatUsername(); ?></span> <span class="income-message"></span> </p>
+            <p><span class="username"><?php echo $user->getChatUsername(); ?></span> <span id="income-message-user-<?php echo $user->getChatUserId(); ?>"></span> </p>
             <span class="user-status offline"></span>
             <span class="text-status">Offline</span>
         </div>

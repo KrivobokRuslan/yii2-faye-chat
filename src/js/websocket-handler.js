@@ -27,7 +27,7 @@
             if (!isEmpty(dialogElem)) {
                 dialogElem.find('#message-container').append(renderMessage(data.message));
             } else {
-                $('#user-' + data.message.author.id).find('.income-message').show();
+                $('#user-' + data.message.author.id).find('#income-message-user' + data.message.author.id).show();
                 playAudio();
             }
         }
@@ -44,7 +44,7 @@
         var audio = new Audio();
         audio.src = chat_module_bundle + '/notif.mp3';
         audio.load();
-        audio.play().then(function(){}).catch (function(error){});
+        audio.play().then(function(){}).catch (function(error){console.log(error);});
     }
 
     function renderMessage(data) {
