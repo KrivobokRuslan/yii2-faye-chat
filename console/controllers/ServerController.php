@@ -23,7 +23,7 @@ class ServerController extends Controller
                 $data = json_decode($data);
                 if (property_exists($data, 'userId') && isset($this->users[$data->userId])) {
                     foreach ($this->users[$data->userId] as $webconnection) {
-                        $webconnection->send($data);
+                        $webconnection->send(json_encode($data));
                     }
                 } else {
                     foreach ($this->users as $webconnections) {
