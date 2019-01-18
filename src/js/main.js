@@ -14,6 +14,7 @@ $(document).ready(function(){
     $(document).on('click', '#send-new-message', function(){
        var dialogId = $(this).closest('.input-group').find('#dialog-id').val();
        var message = $(this).closest('.input-group').find('#new-message').val();
+       $(this).closest('.input-group').find('#new-message').val('');
        $.ajax({
            method: 'post',
            url: '/chat/' + dialogId + '/send',

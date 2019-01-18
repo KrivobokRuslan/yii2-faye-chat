@@ -23,12 +23,13 @@ var handler = {
     },
     newMessage : function(data) {
         var dialogElem = $('#dialog-' + data.message.dialog_id);
+        console.log(dialogElem);
         if (dialogElem) {
             dialogElem.find('#message-container').append(renderMessage(data.message));
         } else {
             $('#user-' + data.message.author_user_id).find('.income-message').show();
+            playAudio();
         }
-        playAudio();
     }
 };
 
@@ -47,12 +48,13 @@ function playAudio() {
 }
 
 function renderMessage(data) {
+    var avatarUrl = data.author.avatar ? data.author.avatar : chat_module_bundle + '/img/no-avatar.png';
     return '<div class="direct-chat-msg right">' +
         '    <div class="direct-chat-info clearfix">' +
-        '        <span class="direct-chat-name pull-right">' + data.author_user_id + '</span>' +
+        '        <span class="direct-chat-name pull-right">' + data.author.username + '</span>' +
         '        <span class="direct-chat-timestamp pull-left">23 Jan 2:00 pm</span>' +
         '    </div>' +
-        '    <img class="direct-chat-img" src="'+ chat_module_bundle + '/img/no-avatar.png">' +
+        '    <img class="direct-chat-img" src="' + avatarUrl + '">' +
         '    <div class="direct-chat-text">' + data.message +
         '    </div>' +
         '</div>';

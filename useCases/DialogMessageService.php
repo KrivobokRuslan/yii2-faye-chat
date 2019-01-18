@@ -22,12 +22,12 @@ class DialogMessageService
         $this->dialogs = $dialogs;
     }
 
-    public function create(DialogMessageForm $form, $dialogId, $currentUserId)
+    public function create(DialogMessageForm $form, $dialogId, $currentUserId): DialogMessage
     {
         $dialog = $this->dialogs->getById($dialogId);
         $message = DialogMessage::create($currentUserId, $dialog->id, $form->message);
         $this->messages->save($message);
-        $this->socketService->send('', ['event' => 'newMessage', 'userId' => $dialog->user_id_one == $currentUserId ? $dialog->user_id_two : $dialog->user_id_one, 'message' => $message->toArray()]);
+        $this->socketService->send('', ['event' => 'newMessage', 'userId' => $dialog->user_id_one == $currentUserId ? $dialog->user_id_two : $dialog->user_id_one, 'message' => $message->convertToArray()]);
         return $message;
     }
 }

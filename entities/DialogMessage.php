@@ -47,4 +47,18 @@ class DialogMessage extends ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'author_user_id']);
     }
+
+    public function convertToArray()
+    {
+        return [
+            'id' => $this->id,
+            'message' => $this->message,
+            'author' => [
+                'username' => $this->author->getChatUsername(),
+                'avatar' => $this->author->getChatAvatar(),
+                'id' => $this->author->getChatAvatar()
+            ],
+            'dialog_id' => $this->dialog_id
+        ];
+    }
 }
