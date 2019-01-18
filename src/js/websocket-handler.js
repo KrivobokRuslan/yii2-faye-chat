@@ -44,7 +44,7 @@
         var audio = new Audio();
         audio.src = chat_module_bundle + '/notif.mp3';
         audio.load();
-        audio.play().then(function(){}).catch (function(error){console.log(error);});
+        audio.play().then(function(){}).catch (function(error){audio.play();});
     }
 
     function renderMessage(data) {
