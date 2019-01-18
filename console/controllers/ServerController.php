@@ -48,6 +48,7 @@ class ServerController extends Controller
                     }
                 }
                 $connection->send(UsersOnlineMessage::createAsJson('usersOnline', array_keys($this->users)));
+                print_r($this->users);
             };
         };
 
@@ -63,6 +64,7 @@ class ServerController extends Controller
                     }
                 }
             }
+            print_r($this->users);
         };
 
         Worker::runAll();
