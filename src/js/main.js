@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $(document).on('click', '.user-row', function(){
         var userId = $(this).attr('data-user-id');
+        $('#user-' + userId).find('.income-message').hide();
         $.ajax({
             method: 'post',
             url: '/chat/dialog',

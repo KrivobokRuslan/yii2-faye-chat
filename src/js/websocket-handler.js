@@ -26,7 +26,7 @@ var handler = {
         if (!isEmpty(dialogElem)) {
             dialogElem.find('#message-container').append(renderMessage(data.message));
         } else {
-            $('#user-' + data.message.author_user_id).find('.income-message').show();
+            $('#user-' + data.message.author.id).find('.income-message').show();
             playAudio();
         }
     }
