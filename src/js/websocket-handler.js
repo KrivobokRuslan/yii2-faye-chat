@@ -23,8 +23,7 @@ var handler = {
     },
     newMessage : function(data) {
         var dialogElem = $('#dialog-' + data.message.dialog_id);
-        console.log(dialogElem);
-        if (dialogElem) {
+        if (!isEmpty(dialogElem)) {
             dialogElem.find('#message-container').append(renderMessage(data.message));
         } else {
             $('#user-' + data.message.author_user_id).find('.income-message').show();
@@ -58,4 +57,12 @@ function renderMessage(data) {
         '    <div class="direct-chat-text">' + data.message +
         '    </div>' +
         '</div>';
+}
+
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
 }
