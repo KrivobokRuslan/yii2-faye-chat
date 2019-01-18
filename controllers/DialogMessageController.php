@@ -32,7 +32,7 @@ class DialogMessageController extends MainController
         if ($form->load(\Yii::$app->request->post(), '') && $form->validate()) {
             try {
                 $message = $this->service->create($form, $dialogId, \Yii::$app->user->id);
-                return $this->renderPartial('//dialog/_message', [
+                return $this->renderPartial('_message', [
                     'message' => $message,
                     'userId' => \Yii::$app->user->id
                 ]);
