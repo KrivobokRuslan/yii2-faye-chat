@@ -10,7 +10,7 @@ use yii\base\Module;
 use yii\web\Controller;
 use yii\web\Response;
 
-class DialogMessageController extends Controller
+class DialogMessageController extends MainController
 {
 
     private $service;
@@ -26,25 +26,18 @@ class DialogMessageController extends Controller
         try {
             $this->findDialog($dialogId);
         } catch (NotFoundException $e) {
-            \Yii::$app->response->format = Response::FORMAT_JSON;
-            return [
-                'status' => false,
-                'error' => $e->getMessage()
-            ];
+            return $this->setErrorStatus($e->getMessage());
         }
         $form = new DialogMessageForm();
         if ($form->load(\Yii::$app->request->post(), '') && $form->validate()) {
             try {
-                $message = $this->service->create($form, $dialogId);
+                $message = $this->service->create($form, $dialogId, \Yii::$app->user->id);
                 return $this->renderPartial('../dialog/_message', [
-                    'message' => $message
+                    'message' => $message,
+                    'currentUserId' => \Yii::$app->user->id
                 ]);
             } catch (\DomainException $e) {
-                \Yii::$app->response->format = Response::FORMAT_JSON;
-                return [
-                    'status' => false,
-                    'error' => $e->getMessage()
-                ];
+                return $this->setErrorStatus($e->getMessage());
             }
 
         }

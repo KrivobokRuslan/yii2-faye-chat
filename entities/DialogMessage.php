@@ -24,6 +24,15 @@ class DialogMessage extends ActiveRecord
         return '{{%chat_dialog_messages}}';
     }
 
+    public static function create($authorId, $dialogId, $text): self
+    {
+        $message = new self();
+        $message->author_user_id = $authorId;
+        $message->dialog_id = $dialogId;
+        $message->message = $text;
+        return $message;
+    }
+
     public function getDialog(): ActiveQuery
     {
         return $this->hasOne(Dialog::class, ['id' => 'dialog_id']);

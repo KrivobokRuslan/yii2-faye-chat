@@ -3,6 +3,7 @@
 namespace krivobokruslan\fayechat\repositories;
 
 use krivobokruslan\fayechat\entities\Dialog;
+use krivobokruslan\fayechat\exceptions\NotFoundException;
 
 class DialogRepository
 {
@@ -11,6 +12,14 @@ class DialogRepository
         if (!$dialog->save()) {
             throw new \DomainException('Saving error');
         }
+    }
+
+    public function getById($id): Dialog
+    {
+        if (($dialog = Dialog::find()->byId($id)->one()) !== null) {
+            return $dialog;
+        }
+        throw new NotFoundException();
     }
 
     public function findByUsers($currentUserId, $userId): ?Dialog

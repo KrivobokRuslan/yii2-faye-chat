@@ -2,6 +2,7 @@
 
 namespace krivobokruslan\fayechat\entities;
 
+use krivobokruslan\fayechat\queries\DialogQuery;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -33,5 +34,10 @@ class Dialog extends ActiveRecord
     public function getMessages(): ActiveQuery
     {
         return $this->hasMany(DialogMessage::class, ['dialog_id' => 'id']);
+    }
+
+    public static function find()
+    {
+        return new DialogQuery(get_called_class());
     }
 }

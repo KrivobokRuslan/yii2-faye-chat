@@ -16,10 +16,13 @@ $(document).ready(function(){
        var message = $(this).closest('.input-group').find('#new-message').val();
        $.ajax({
            method: 'post',
-           url: '/faye-chat/dialog/message',
+           url: '/chat/' + dialogId + '/send',
            data: {
                dialog_id : dialogId,
                message: message
+           },
+           success: function(res) {
+               $('#message-container').append(res);
            }
        });
     });

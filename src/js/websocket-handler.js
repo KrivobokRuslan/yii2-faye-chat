@@ -20,10 +20,15 @@ var handler = {
         template.find('img').attr('src', avatarUrl);
         $('#user-container').append(template);
         template.show();
+    },
+    newMessage : function(data) {
+        console.log(data);
     }
 };
 
 ws.onmessage = function(evt) {
     var data = JSON.parse(evt.data);
-    handler[data.event](data);
+    if (handler[data.event]) {
+        handler[data.event](data);
+    }
 };
