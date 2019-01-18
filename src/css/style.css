@@ -14,6 +14,14 @@
     display: inline-block;
 }
 
+.income-message {
+    display: none;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #4682B4;
+}
+
 .user-row {
     cursor: pointer;
 }

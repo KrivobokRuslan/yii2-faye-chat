@@ -5,7 +5,7 @@
 * @var string $userId
 */
 ?>
-<div class="panel panel-default">
+<div class="panel panel-default" id="dialog-<?php echo $dialog->id; ?>">
     <div class="panel-body direct-chat-primary" id="message-container">
         <?php
         if (!empty($dialog->messages)) {
