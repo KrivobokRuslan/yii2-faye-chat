@@ -33,7 +33,7 @@ var handler = {
         }
     }
 };
-
+var ws = new WebSocket(wshost);
 ws.onmessage = function(evt) {
     var data = JSON.parse(evt.data);
     if (handler[data.event]) {

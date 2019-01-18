@@ -39,36 +39,6 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
 <?php
 
 $this->registerJs("
-    var ws = new WebSocket('".$clientHost."/?user_id=" . Yii::$app->user->id . "');
+    var wshost = '".$clientHost."/?user_id=" . Yii::$app->user->id . "';
     var chat_module_bundle = '".$bundle->baseUrl."';
 ", \yii\web\View::POS_BEGIN);
-
-//$this->registerJsFile($fayeHost . '/client.js');
-//$this->registerJs("
-//    var client = new Faye.Client('".$fayeHost."?user_id=" . Yii::$app->user->id . "');
-//
-//    client.subscribe('/connect', function(data) {
-//        $('#user-' + data.user_id + ' .user-status').removeClass('offline').addClass('online');
-//        $('#user-' + data.user_id + ' .text-status').text('Online');
-//    });
-//    client.subscribe('/get-online-users/" . Yii::$app->user->id . "', function(data) {
-//        for (user_id in data.users) {
-//            $('#user-' + data.users[user_id].user_id + ' .user-status').removeClass('offline').addClass('online');
-//            $('#user-' + data.users[user_id].user_id + ' .text-status').text('Online');
-//        }
-//    });
-//    client.subscribe('/dialog/" . Yii::$app->user->id . "/message/add/', function(data) {
-//        $('#message-container').append(data);
-//    });
-//    client.subscribe('/new-user', function(data) {
-//        var template = $('#user-container #user-template').clone().prop('id', 'user-' + data.id).attr('data-user-id', data.id);
-//        template.find('.username').text(data.username);
-//        template.find('img').attr('src', data.avatar);
-//        $('#user-container').append(template);
-//        template.show();
-//    });
-//    client.subscribe('/disconnect', function(data) {
-//        $('#user-' + data.user_id + ' .user-status').removeClass('inline').addClass('offline');
-//        $('#user-' + data.user_id + ' .text-status').text('Offline');
-//    });
-//", \yii\web\View::POS_END);
