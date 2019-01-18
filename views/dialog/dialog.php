@@ -12,7 +12,7 @@
             foreach ($dialog->messages as $message) {
                 echo $this->render('_message', [
                     'message' => $message,
-                    'currentUserId' => $userId
+                    'userId' => $userId
                 ]);
             }
         } else {

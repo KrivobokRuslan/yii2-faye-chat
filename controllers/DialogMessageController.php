@@ -34,7 +34,7 @@ class DialogMessageController extends MainController
                 $message = $this->service->create($form, $dialogId, \Yii::$app->user->id);
                 return $this->renderPartial('../dialog/_message', [
                     'message' => $message,
-                    'currentUserId' => \Yii::$app->user->id
+                    'userId' => \Yii::$app->user->id
                 ]);
             } catch (\DomainException $e) {
                 return $this->setErrorStatus($e->getMessage());

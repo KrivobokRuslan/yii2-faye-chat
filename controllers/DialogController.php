@@ -27,7 +27,7 @@ class DialogController extends MainController
                 $dialog = $this->service->create($form, \Yii::$app->user->id);
                 return $this->renderPartial('dialog', [
                     'dialog' => $dialog,
-                    'currentUserId' => \Yii::$app->user->id
+                    'userId' => \Yii::$app->user->id
                 ]);
             } catch (\DomainException $e) {
                 return $this->setErrorStatus($e->getMessage());
