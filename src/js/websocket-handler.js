@@ -2,8 +2,10 @@ var handler = {
     userConnect : function(data) {
         $('#user-' + data.user_id + ' .user-status').removeClass('offline').addClass('online');
         $('#user-' + data.user_id + ' .text-status').text('Online');
+        console.log(data);
     },
     usersOnline : function(data) {
+        console.log(data);
         data.users.forEach(function(item, i) {
             $('#user-' + item + ' .user-status').removeClass('offline').addClass('online');
             $('#user-' + item + ' .text-status').text('Online');
