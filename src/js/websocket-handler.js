@@ -23,6 +23,7 @@
             template.show();
         },
         newMessage : function(data) {
+            console.log(data);
             var dialogElem = $('#dialog-' + data.message.dialog_id);
             if (!isEmpty(dialogElem)) {
                 dialogElem.find('#message-container').append(renderMessage(data.message));
