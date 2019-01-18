@@ -3,10 +3,8 @@
         userConnect : function(data) {
             $('#user-' + data.user_id + ' .user-status').removeClass('offline').addClass('online');
             $('#user-' + data.user_id + ' .text-status').text('Online');
-            console.log(data);
         },
         usersOnline : function(data) {
-            console.log(data);
             data.users.forEach(function(item, i) {
                 $('#user-' + item + ' .user-status').removeClass('offline').addClass('online');
                 $('#user-' + item + ' .text-status').text('Online');
@@ -29,6 +27,8 @@
             if (!isEmpty(dialogElem)) {
                 dialogElem.find('#message-container').append(renderMessage(data.message));
             } else {
+                console.log(data.message.author.id);
+                console.log($('#user-' + data.message.author.id).find('.income-message'));
                 $('#user-' + data.message.author.id).find('.income-message').show();
                 playAudio();
             }
