@@ -16,7 +16,7 @@ $ws_worker->onWorkerStart = function($worker) use (&$users)
 
     $inner_tcp_worker->onMessage = function($connection, $data) use (&$users) {
         $data = json_decode($data);
-        if (property_exists($data, 'user') && isset($users[$data->user])) {
+        if (property_exists($data, 'userId') && isset($users[$data->user])) {
             foreach ($users[$data->user] as $webconnection) {
                 $webconnection->send($data);
             }
@@ -28,6 +28,7 @@ $ws_worker->onWorkerStart = function($worker) use (&$users)
             }
         }
     };
+
     $inner_tcp_worker->listen();
 };
 
@@ -39,10 +40,10 @@ $ws_worker->onConnect = function($connection) use (&$users)
         $connection->user = $_GET['user_id'];
         foreach ($users as $webconnections) {
             foreach ($webconnections as $webconnection) {
-                $webconnection->send(UserConnectMessage::createAsJson('/user-connect', $connection->user));
+                $webconnection->send(UserConnectMessage::createAsJson('userConnect', $connection->user));
             }
         }
-        $connection->send(UsersOnlineMessage::createAsJson('/users-online', array_keys($users)));
+        $connection->send(UsersOnlineMessage::createAsJson('usersOnline', array_keys($users)));
     };
 };
 
@@ -54,7 +55,7 @@ $ws_worker->onClose = function($connection) use(&$users)
         unset($users[$connection->user]);
         foreach ($users as $webconnections) {
             foreach ($webconnections as $webconnection) {
-                $webconnection->send(UserConnectMessage::createAsJson('/user-disconnect', $connection->user));
+                $webconnection->send(UserConnectMessage::createAsJson('userDisconnect', $connection->user));
             }
         }
     }

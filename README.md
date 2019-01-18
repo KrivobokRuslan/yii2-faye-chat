@@ -65,7 +65,7 @@ or use your own event handler by example of
 
 - Your Identity class must implements <code>krivobokruslan\fayechat\interfaces\UserInterface</code>
 
-- Run <code>./yii migrate --migrationPath=krivobokruslan\yii2-faye-chat\migrations</code>
+- Run <code>./yii migrate --migrationPath=vendor\krivobokruslan\yii2-faye-chat\migrations</code>
 
 Run server
 -----
