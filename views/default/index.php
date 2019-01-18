@@ -35,7 +35,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
 
         </div>
     </div>
-
+<audio id="chat-audio-norif" src="<?php echo $bundle->baseUrl . '/notif.mp3'?>"></audio>
 <?php
 
 $this->registerJs("

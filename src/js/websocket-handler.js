@@ -41,13 +41,7 @@
     };
 
     function playAudio() {
-        var audio = new Audio();
-        audio.src = chat_module_bundle + '/notif.mp3';
-        audio.load();
-        var audioPromise = audio.play();
-        if (audioPromise !== null) {
-            audioPromise.then(function(){}).catch (function(error){audio.play();});
-        }
+        document.getElementById("chat-audio-norif").play();
     }
 
     function renderMessage(data) {
