@@ -8,6 +8,7 @@ $(document).ready(function(){
             data: {user_id : userId},
             success: function(res) {
                 $('#dialog-container').empty().append(res);
+                $('#dialog-container').find('.direct-chat-msg:last-child').scrollIntoView();
             }
         });
     });
