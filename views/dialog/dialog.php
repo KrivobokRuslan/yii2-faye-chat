@@ -8,8 +8,8 @@
 <div class="panel panel-default" id="dialog-<?php echo $dialog->id; ?>">
     <div class="panel-body direct-chat-primary" id="message-container">
         <?php
-        if (!empty($dialog->messages)) {
-            foreach ($dialog->messages as $message) {
+        if (!empty($dialog->lastMessages)) {
+            foreach ($dialog->lastMessages as $message) {
                 echo $this->render('_message', [
                     'message' => $message,
                     'userId' => $userId

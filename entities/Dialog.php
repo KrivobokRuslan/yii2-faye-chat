@@ -17,6 +17,7 @@ use yii\db\ActiveRecord;
  * @property integer $updated_at
  *
  * @property DialogMessage[] $messages
+ * @property DialogMessage[] $lastMessages
  */
 
 class Dialog extends ActiveRecord
@@ -47,6 +48,11 @@ class Dialog extends ActiveRecord
     public function getMessages(): ActiveQuery
     {
         return $this->hasMany(DialogMessage::class, ['dialog_id' => 'id']);
+    }
+
+    public function getLatMessages(int $limit = 10): ActiveQuery
+    {
+        return $this->getMessages()->orderBy('created_at DESC')->limit($limit);
     }
 
     public static function find()
