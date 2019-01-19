@@ -52,7 +52,7 @@ class Dialog extends ActiveRecord
 
     public function getLastMessages(int $limit = 10): ActiveQuery
     {
-        return $this->getMessages()->orderBy('created_at')->limit($limit);
+        return $this->getMessages()->orderBy('created_at DESC')->limit($limit);
     }
 
     public static function find()
