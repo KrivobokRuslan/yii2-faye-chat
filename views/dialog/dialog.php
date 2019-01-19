@@ -9,7 +9,7 @@
     <div class="panel-body direct-chat-primary" id="message-container">
         <?php
         if (!empty($dialog->lastMessages)) {
-            foreach ($dialog->lastMessages as $message) {
+            foreach (array_reverse($dialog->lastMessages) as $message) {
                 echo $this->render('_message', [
                     'message' => $message,
                     'userId' => $userId
