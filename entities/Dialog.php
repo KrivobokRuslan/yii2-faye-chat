@@ -50,9 +50,9 @@ class Dialog extends ActiveRecord
         return $this->hasMany(DialogMessage::class, ['dialog_id' => 'id']);
     }
 
-    public function getLatMessages(int $limit = 10): ActiveQuery
+    public function getLastMessages(int $limit = 10): ActiveQuery
     {
-        return $this->getMessages()->orderBy('created_at DESC')->limit($limit);
+        return $this->getMessages()->orderBy('created_at')->limit($limit);
     }
 
     public static function find()
