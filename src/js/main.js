@@ -8,7 +8,7 @@ $(document).ready(function(){
             data: {user_id : userId},
             success: function(res) {
                 $('#dialog-container').empty().append(res);
-                $('html, body').animate({
+                $('#dialog-container').animate({
                     scrollTop: $('#dialog-container').find('.direct-chat-msg:last-child').offset().top + 'px'
                 }, 'fast');
             }
