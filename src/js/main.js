@@ -8,8 +8,8 @@ $(document).ready(function(){
             data: {user_id : userId},
             success: function(res) {
                 $('#dialog-container').empty().append(res);
-                $('#dialog-container').animate({
-                    scrollTop: $('#dialog-container').find('.direct-chat-msg:last-child').offset().top + 'px'
+                $('#message-container').animate({
+                    scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
                 }, 'fast');
             }
         });
@@ -28,6 +28,9 @@ $(document).ready(function(){
            },
            success: function(res) {
                $('#message-container').append(res);
+               $('#message-container').animate({
+                   scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
+               }, 'fast');
            }
        });
     });
