@@ -26,6 +26,9 @@
             var dialogElem = $('#dialog-' + data.message.dialog_id);
             if (!isEmpty(dialogElem)) {
                 dialogElem.find('#message-container').append(renderMessage(data.message));
+                $('#message-container').animate({
+                    scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
+                }, 'fast');
             } else {
                 $('#user-' + data.message.author.id).find('#income-message-user-' + data.message.author.id).css({'display':'inline-block'});
                 playAudio();
