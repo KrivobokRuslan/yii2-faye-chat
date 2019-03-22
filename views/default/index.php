@@ -39,6 +39,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
 <?php
 
 $this->registerJs("
+    var currentUser = ".Yii::$app->user->id.";
     var wshost = '".$clientHost."/?user_id=" . Yii::$app->user->id . "';
     var chat_module_bundle = '".$bundle->baseUrl."';
 ", \yii\web\View::POS_BEGIN);

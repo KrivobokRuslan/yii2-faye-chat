@@ -24,7 +24,7 @@
         },
         newMessage : function(data) {
             var dialogElem = $('#dialog-' + data.message.dialog_id);
-            if (!isEmpty(dialogElem)) {
+            if (!isEmpty(dialogElem) && currentUser != data.message.author.id) {
                 dialogElem.find('#message-container').append(renderMessage(data.message));
                 $('#message-container').animate({
                     scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
