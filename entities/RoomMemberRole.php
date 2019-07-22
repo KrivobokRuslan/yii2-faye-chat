@@ -5,6 +5,7 @@ namespace krivobokruslan\fayechat\entities;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use Yii;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
 /**
  * This is the model class for table "room_member_roles".
@@ -24,6 +25,20 @@ class RoomMemberRole extends ActiveRecord
     public static function tableName()
     {
         return '{{%chat_room_member_roles}}';
+    }
+
+    public function behaviors()
+    {
+        return [
+            'saveRelations' => [
+                'class' => SaveRelationsBehavior::class,
+                'relations' => [
+                    'role',
+                    'room',
+                    'member'
+                ],
+            ]
+        ];
     }
 
     public function transactions()

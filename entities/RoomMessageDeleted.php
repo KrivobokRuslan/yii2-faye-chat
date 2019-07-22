@@ -3,6 +3,7 @@
 namespace krivobokruslan\fayechat\entities;
 
 use yii\db\ActiveRecord;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
 /**
  *
@@ -18,6 +19,19 @@ class RoomMessageDeleted extends ActiveRecord
     public static function tableName()
     {
         return '{{%chat_room_message_deleted}}';
+    }
+
+    public function behaviors()
+    {
+        return [
+            'saveRelations' => [
+                'class' => SaveRelationsBehavior::className(),
+                'relations' => [
+                    'roomMessage',
+                    'user'
+                ],
+            ]
+        ];
     }
 
     public function transactions()

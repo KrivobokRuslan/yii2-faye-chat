@@ -6,6 +6,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use Yii;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
 /**
  * This is the model class for table "room_message_files".
@@ -32,6 +33,12 @@ class RoomMessageFile extends ActiveRecord
                 'class' => TimestampBehavior::class,
                 'createdAtAttribute' => 'ctime',
                 'updatedAtAttribute' => false
+            ],
+            'saveRelations' => [
+                'class' => SaveRelationsBehavior::className(),
+                'relations' => [
+                    'message'
+                ],
             ]
         ];
     }

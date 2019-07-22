@@ -7,6 +7,7 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use Yii;
 use yii\helpers\ArrayHelper;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
 /**
  * This is the model class for table "rooms".
@@ -41,6 +42,16 @@ class Room extends ActiveRecord
                 'class' => TimestampBehavior::class,
                 'createdAtAttribute' => 'ctime',
                 'updatedAtAttribute' => false
+            ],
+            'saveRelations' => [
+                'class' => SaveRelationsBehavior::className(),
+                'relations' => [
+                    'owner',
+                    'membersAssignments',
+                    'members',
+                    'messages',
+                    'roomMemberRoles'
+                ],
             ]
         ];
     }

@@ -15,7 +15,8 @@
         "yiisoft/yii2": "~2.0.0",
         "nc/faye-client": "~1.0",
         "workerman/workerman": "^3.5",
-        "kartik-v/yii2-widget-select2": "dev-master"
+        "kartik-v/yii2-widget-select2": "dev-master",
+        "la-haute-societe/yii2-save-relations-behavior": "*"
     },
     "autoload": {
         "psr-4": {
