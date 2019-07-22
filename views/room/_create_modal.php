@@ -20,7 +20,9 @@ use kartik\select2\Select2;
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <?php $form = \yii\widgets\ActiveForm::begin(); ?>
+                        <?php $form = \yii\widgets\ActiveForm::begin([
+                            'id' => 'roomCreateForm'
+                        ]); ?>
                         <?php echo $form->field($model, 'title')->textInput();?>
                         <?php echo $form->field($model, 'members')->widget(Select2::class, [
                             'data' => \yii\helpers\ArrayHelper::map($users, 'id', 'username'),

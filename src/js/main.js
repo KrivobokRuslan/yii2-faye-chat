@@ -34,4 +34,15 @@ $(document).ready(function(){
            }
        });
     });
+
+    $(document).on('submit', '#roomCreateForm', function() {
+        $.ajax({
+            url: '/chat/room',
+            type: 'post',
+            success: function(response) {
+                $('#group-container').append(response.roomInListTemplate);
+                $('#createRoomModal').modal('hide');
+            }
+        });
+    });
 });
