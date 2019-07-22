@@ -4,6 +4,7 @@ namespace krivobokruslan\fayechat\entities;
 
 use krivobokruslan\fayechat\interfaces\UserInterface;
 use krivobokruslan\fayechat\queries\UserQuery;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -13,6 +14,9 @@ use yii\db\ActiveRecord;
  * @property string $username
  * @property string $avatar
  * @property int $status
+ *
+ * @property RoomMemberRole[] $roomsAssignments
+ * @property Room[] $rooms
  */
 
 class User extends ActiveRecord implements UserInterface
@@ -62,5 +66,15 @@ class User extends ActiveRecord implements UserInterface
     public function getChatUsername(): string
     {
         return $this->username;
+    }
+
+    public function getRoomsAssignments(): ActiveQuery
+    {
+        return $this->hasMany(RoomMemberRole::class, ['member_id' => 'user_id']);
+    }
+
+    public function getRooms(): ActiveQuery
+    {
+        return $this->hasMany(Room::class, ['id' => 'room_id'])->via('roomsAssignments');
     }
 }
