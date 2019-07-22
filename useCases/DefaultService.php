@@ -17,6 +17,7 @@ class DefaultService
     )
     {
         $this->users = $users;
+        $this->rooms = $rooms;
     }
 
     public function list(): array
