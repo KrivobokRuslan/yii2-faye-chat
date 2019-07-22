@@ -44,7 +44,8 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                 <ul role="tabpanel" aria-labelledby="group-container-tab" id="group-container" class="list-group tab-pane fade">
                     <li>
                         <?php echo $this->render('../room/_create_modal', [
-                            'model' => $roomForm
+                            'model' => $roomForm,
+                            'suers' => $users
                         ]); ?>
                     </li>
                 </ul>
