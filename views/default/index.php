@@ -45,7 +45,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                     <li>
                         <?php echo $this->render('../room/_create_modal', [
                             'model' => $roomForm,
-                            'suers' => $users
+                            'users' => $users
                         ]); ?>
                     </li>
                 </ul>
