@@ -44,6 +44,7 @@ Configuration
 'controllerMap' => [
     ...
     'server' => \krivobokruslan\fayechat\console\controllers\ServerController::class
+    'role' => \krivobokruslan\fayechat\console\controllers\RoleController::class
 ],
 
 </pre>
@@ -75,7 +76,7 @@ Run command <code> ./yii server/start [string $ws_host] [string $tcp_host] </cod
 Init roles
 -----
 
-Run command <code> ./yii role/init </code>
+Run command <code> ./yii role/init-roles </code>
 
 Usage
 -----
