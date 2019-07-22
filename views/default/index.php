@@ -41,7 +41,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                 </ul>
                 <ul role="tabpanel" aria-labelledby="group-container-tab" id="group-container" class="list-group tab-pane fade">
                     <li>
-                        <button type="button" class="btn btn-success">Добавить группу</button>
+                        <?php echo $this->render('../room/_create_modal'); ?>
                     </li>
                 </ul>
             </div>
