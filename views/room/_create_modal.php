@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \yii\web\View $this
+ * @var \krivobokruslan\fayechat\forms\RoomForm $model
+ */
+?>
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createRoomModal">Добавить группу</button>
 <div class="modal fade" id="createRoomModal" tabindex="-1" role="dialog" aria-labelledby="createRoomModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -9,7 +15,12 @@
                 </button>
             </div>
             <div class="modal-body">
-
+                <div class="row">
+                    <?php $form = \yii\widgets\ActiveForm::begin(); ?>
+                    <?php echo $form->field($model, 'title')->textInput();?>
+                    <button type="button" class="btn btn-success">Создать</button>
+                    <?php \yii\widgets\ActiveForm::end();?>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>

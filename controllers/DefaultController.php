@@ -5,6 +5,7 @@ namespace krivobokruslan\fayechat\controllers;
 use krivobokruslan\fayechat\ChatModule;
 use krivobokruslan\fayechat\entities\User;
 use krivobokruslan\fayechat\exceptions\NotFoundException;
+use krivobokruslan\fayechat\forms\RoomForm;
 use krivobokruslan\fayechat\interfaces\UserInterface;
 use krivobokruslan\fayechat\useCases\DefaultService;
 use krivobokruslan\fayechat\useCases\UserService;
@@ -33,11 +34,13 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $user = $this->userService->addUser($this->module->getUser());
-
+        $roomForm = new RoomForm();
+        $roomForm->addUserToMembers($user->getChatUserId());
         return $this->render('index', [
             'user' => $user,
             'users' => $this->service->list(),
             'rooms' => $this->service->rooms($user->getChatUserId()),
+            'roomForm' => $roomForm,
             'clientHost' => $this->module->getClientHost()
         ]);
     }

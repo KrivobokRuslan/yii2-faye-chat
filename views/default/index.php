@@ -2,6 +2,8 @@
 /**
  * @var \yii\web\View $this
  * @var array $users
+ * @var array $rooms
+ * @var \krivobokruslan\fayechat\forms\RoomForm $roomForm
  * @var string $clientHost
  */
 
@@ -41,7 +43,9 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                 </ul>
                 <ul role="tabpanel" aria-labelledby="group-container-tab" id="group-container" class="list-group tab-pane fade">
                     <li>
-                        <?php echo $this->render('../room/_create_modal'); ?>
+                        <?php echo $this->render('../room/_create_modal', [
+                            'model' => $roomForm
+                        ]); ?>
                     </li>
                 </ul>
             </div>
