@@ -40,7 +40,6 @@ class DefaultController extends Controller
     {
         $user = $this->userService->addUser($this->module->getUser());
         $roomForm = new RoomForm();
-        $roomForm->addUserToMembers($user->getChatUserId());
         return $this->render('index', [
             'user' => $user,
             'users' => $this->service->list(),
