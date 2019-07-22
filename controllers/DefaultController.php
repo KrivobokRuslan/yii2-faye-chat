@@ -23,7 +23,12 @@ class DefaultController extends Controller
     private $service;
     private $userService;
 
-    public function __construct($id, Module $module, array $config = [], DefaultService $service, UserService $userService)
+    public function __construct(
+        $id,
+        Module $module,
+        array $config = [],
+        DefaultService $service,
+        UserService $userService)
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;

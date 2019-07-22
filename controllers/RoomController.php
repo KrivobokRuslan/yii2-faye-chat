@@ -20,7 +20,7 @@ class RoomController extends MainController
     {
         $this->setResponseJsonFormat();
         $form = new RoomForm();
-        $form->addUserToMembers(\Yii::$app->user->id);
+        $form->addOwner(\Yii::$app->user->id);
         if ($form->load(\Yii::$app->request->post()) && $form->validate()) {
             try {
                 $room = $this->service->create($form, \Yii::$app->user->id);
