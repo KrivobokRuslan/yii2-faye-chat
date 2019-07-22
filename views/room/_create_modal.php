@@ -39,10 +39,6 @@ use kartik\select2\Select2;
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-primary">Создать</button>
-            </div>
         </div>
     </div>
 </div>
