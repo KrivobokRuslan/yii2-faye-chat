@@ -15,6 +15,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
         </div>
         <div class="pull-left info">
             <p><span class="username"><?php echo $room->title ?></span> <span class="income-message" id="income-message-user-<?php echo $room->id; ?>"></span> </p>
+            <span class="text-status">Участников: <?php echo $room->getCountMembers(); ?></span>
         </div>
     </div>
 </li>
