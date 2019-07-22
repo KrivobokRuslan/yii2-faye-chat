@@ -37,6 +37,7 @@ class DefaultController extends Controller
         return $this->render('index', [
             'user' => $user,
             'users' => $this->service->list(),
+            'rooms' => $this->service->rooms($user->getChatUserId()),
             'clientHost' => $this->module->getClientHost()
         ]);
     }

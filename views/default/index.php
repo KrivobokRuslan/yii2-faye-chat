@@ -19,7 +19,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                 </li>
             </ul>
             <div class="tab-content" id="chatsTabContent">
-                <ul role="tabpanel" aria-labelledby="user-container-tab" id="user-container" class="list-group tab-pane fade show active in">
+                <ul role="tabpanel" aria-labelledby="user-container-tab" id="user-container" class="list-group tab-pane fade active in">
                     <li id="user-template" data-user-id="" style="display: none;" class="user-row">
                         <div class="user-panel">
                             <div class="pull-left image">
@@ -41,7 +41,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                 </ul>
                 <ul role="tabpanel" aria-labelledby="group-container-tab" id="group-container" class="tab-pane fade">
                     <li>
-                        Room
+
                     </li>
                 </ul>
             </div>
