@@ -39,9 +39,9 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                         ]);
                     } ?>
                 </ul>
-                <ul role="tabpanel" aria-labelledby="group-container-tab" id="group-container" class="tab-pane fade">
+                <ul role="tabpanel" aria-labelledby="group-container-tab" id="group-container" class="list-group tab-pane fade">
                     <li>
-
+                        <button type="button" class="btn btn-success">Добавить группу</button>
                     </li>
                 </ul>
             </div>

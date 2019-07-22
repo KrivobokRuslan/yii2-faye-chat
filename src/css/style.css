@@ -42,8 +42,9 @@
     height: 55px;
 }
 
-#user-container {
+#user-container, #group-container {
     list-style: none outside none;
+    padding-top: 10px;
 }
 
 .direct-chat-img {
