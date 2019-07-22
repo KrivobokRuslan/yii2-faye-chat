@@ -24,7 +24,7 @@ class RoomController extends MainController
             try {
                 $room = $this->service->create($form, \Yii::$app->user->id);
                 return [
-                    'roomInListTemplate' => $this->renderPartial('roomInList', [
+                    'roomInListTemplate' => $this->renderPartial('_room_in_list', [
                         'room' => $room
                     ])
                 ];
