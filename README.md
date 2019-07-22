@@ -70,7 +70,12 @@ or use your own event handler by example of
 Run server
 -----
 
-Run command ./yii server/start [string $ws_host] [string $tcp_host] </code>
+Run command <code> ./yii server/start [string $ws_host] [string $tcp_host] </code>
+
+Init roles
+-----
+
+Run command <code> ./yii role/init </code>
 
 Usage
 -----
