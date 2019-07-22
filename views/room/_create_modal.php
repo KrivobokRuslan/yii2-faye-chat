@@ -19,20 +19,22 @@ use kartik\select2\Select2;
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <?php $form = \yii\widgets\ActiveForm::begin(); ?>
-                    <?php echo $form->field($model, 'title')->textInput();?>
-                    <?php echo $form->field($model, 'members')->widget(Select2::classname(), [
-                        'data' => \yii\helpers\ArrayHelper::map($users, 'id', 'username'),
-                        'options' => [
-                            'placeholder' => 'Выберите пользователя',
-                            'multiple' => true
-                        ],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]); ?>
-                    <button type="button" class="btn btn-success">Создать</button>
-                    <?php \yii\widgets\ActiveForm::end();?>
+                    <div class="col-md-12">
+                        <?php $form = \yii\widgets\ActiveForm::begin(); ?>
+                        <?php echo $form->field($model, 'title')->textInput();?>
+                        <?php echo $form->field($model, 'members')->widget(Select2::class, [
+                            'data' => \yii\helpers\ArrayHelper::map($users, 'id', 'username'),
+                            'options' => [
+                                'placeholder' => 'Выберите пользователя',
+                                'multiple' => true
+                            ],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ]); ?>
+                        <button type="submit" class="btn btn-success">Создать</button>
+                        <?php \yii\widgets\ActiveForm::end();?>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
