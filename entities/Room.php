@@ -192,7 +192,7 @@ class Room extends ActiveRecord
 
     public function getMembers(): ActiveQuery
     {
-        return $this->hasMany(User::class, ['user_id' => 'member_id'])->via('membersAssignments');
+        return $this->hasMany(User::class, ['id' => 'member_id'])->via('membersAssignments');
     }
 
     public function getMessages(): ActiveQuery
