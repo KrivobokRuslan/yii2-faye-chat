@@ -48,6 +48,11 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                             'users' => $users
                         ]); ?>
                     </li>
+                    <?php foreach ($rooms as $room) {
+                        echo $this->render('../room/_room_in_list', [
+                            'room' => $room
+                        ]);
+                    } ?>
                 </ul>
             </div>
         </div>
