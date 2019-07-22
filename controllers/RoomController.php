@@ -18,6 +18,7 @@ class RoomController extends MainController
 
     public function actionCreate()
     {
+        $this->setResponseJsonFormat();
         $form = new RoomForm();
         $form->addUserToMembers(\Yii::$app->user->id);
         if ($form->load(\Yii::$app->request->post()) && $form->validate()) {
