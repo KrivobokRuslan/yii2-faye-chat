@@ -39,6 +39,7 @@ $(document).ready(function(){
         $.ajax({
             url: '/chat/room',
             type: 'post',
+            data: $(this).serialize(),
             success: function(response) {
                 $('#group-container').append(response.roomInListTemplate);
                 $('#createRoomModal').modal('hide');
