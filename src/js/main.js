@@ -43,7 +43,7 @@ $(document).ready(function(){
             success: function(response) {
                 $('#group-container').append(response.roomInListTemplate);
                 $('#createRoomModal').modal('hide');
-                $('#roomCreateForm').reset();
+                $('#roomCreateForm').get(0).reset();
             }
         });
         return false;
