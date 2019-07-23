@@ -44,7 +44,13 @@ class RoomService
             }
         }
         $this->rooms->save($room);
-        $this->socketService->send('', ['event' => 'addRoom', 'room' => $room]);
+        foreach ($room->members as $member) {
+            if ($room->isOwner($member->id)) {
+                continue;
+            }
+            $this->socketService->send('', ['event' => 'addRoom', 'room' => $room, 'userId' => $member->id]);
+        }
+
         return $room;
     }
 
