@@ -34,7 +34,7 @@ class RoomMessageQuery extends ActiveQuery
 
     public function notHided($userId)
     {
-        $this->andWhere(['not exists', RoomMessageDeleted::find()->where('room_message_id = room_messages.id')->andWhere(['user_id' => $userId])]);
+        $this->andWhere(['not exists', RoomMessageDeleted::find()->where('room_message_id = '.RoomMessage::tableName().'.id')->andWhere(['user_id' => $userId])]);
         return $this;
     }
 
