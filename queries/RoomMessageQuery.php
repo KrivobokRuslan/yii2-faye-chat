@@ -4,7 +4,7 @@ namespace krivobokruslan\fayechat\queries;
 
 use yii\db\ActiveQuery;
 use krivobokruslan\fayechat\entities\RoomMessage;
-use zichat\entities\RoomMessageDeleted;
+use krivobokruslan\fayechat\entities\RoomMessageDeleted;
 
 class RoomMessageQuery extends ActiveQuery
 {
