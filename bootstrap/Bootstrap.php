@@ -13,7 +13,8 @@ class Bootstrap implements BootstrapInterface
             'chat' => 'faye-chat/default/index',
             'POST chat/dialog' => 'faye-chat/dialog/create',
             'POST chat/<dialogId:\d+>/send' => 'faye-chat/dialog-message/create',
-            'POST chat/room' => 'faye-chat/room/create'
+            'POST chat/room' => 'faye-chat/room/create',
+            'POST chat/room/<roomId:\d+>' => 'faye-chat/room/view',
         ], false);
     }
 }
