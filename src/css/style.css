@@ -28,18 +28,15 @@
     background-color: #4682B4;
 }
 
-.user-row {
+.user-row, .group-row {
     cursor: pointer;
+    height: 55px;
 }
 
-.user-panel {
+.user-panel, .group-panel {
     position: relative;
     width: 100%;
     padding: 10px;
-}
-
-.user-row {
-    height: 55px;
 }
 
 #user-container, #group-container {
