@@ -34,4 +34,11 @@ class RoomController extends MainController
             }
         }
     }
+
+    public function actionView($id)
+    {
+        return $this->renderPartial('room', [
+            'room' => $this->service->view($id, \Yii::$app->user->id)
+        ]);
+    }
 }

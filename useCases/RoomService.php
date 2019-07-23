@@ -7,6 +7,7 @@ use krivobokruslan\fayechat\entities\RoomRole;
 use krivobokruslan\fayechat\forms\RoomForm;
 use krivobokruslan\fayechat\helpers\TransactionManager;
 use krivobokruslan\fayechat\interfaces\SocketServiceInterface;
+use krivobokruslan\fayechat\repositories\RoomMessageRepository;
 use krivobokruslan\fayechat\repositories\RoomRepository;
 use krivobokruslan\fayechat\repositories\RoomRoleRepository;
 use krivobokruslan\fayechat\converted\Room as cRoom;
@@ -17,18 +18,21 @@ class RoomService
     private $transactions;
     private $roles;
     private $socketService;
+    private $messages;
 
     public function __construct(
         RoomRepository $rooms,
         RoomRoleRepository $roles,
         TransactionManager $transactions,
-        SocketServiceInterface $socketService
+        SocketServiceInterface $socketService,
+        RoomMessageRepository $messages
     )
     {
         $this->rooms = $rooms;
         $this->transactions = $transactions;
         $this->roles = $roles;
         $this->socketService = $socketService;
+        $this->messages = $messages;
     }
 
     public function create(RoomForm $form, $ownerId): Room
@@ -54,13 +58,13 @@ class RoomService
         return $room;
     }
 
-//    public function view($id, $userId): RoomAdvanced
-//    {
-//        $room = $this->rooms->getById($id);
-//        $messages = $this->messages->getByRoomForUser($room->id, $userId);
-//        $roomAdvanced = new RoomAdvanced($room, $messages);
-//        return $roomAdvanced;
-//    }
+    public function view($id, $userId): cRoom
+    {
+        $room = $this->rooms->getById($id);
+        $messages = $this->messages->getByRoomForUser($room->id, $userId);
+        $roomAdvanced = new cRoom($room, $messages);
+        return $roomAdvanced;
+    }
 //
 //    public function index($userId, $appIdentifier): array
 //    {

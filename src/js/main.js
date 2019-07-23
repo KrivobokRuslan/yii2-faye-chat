@@ -15,6 +15,20 @@ $(document).ready(function(){
         });
     });
 
+    $(document).on('click', '.group-row', function(){
+        var roomId = $(this).attr('data-room-id');
+        $.ajax({
+            method: 'get',
+            url: '/chat/room/' + roomId,
+            success: function(res) {
+                $('#dialog-container').empty().append(res);
+                $('#message-container').animate({
+                    scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
+                }, 'fast');
+            }
+        });
+    });
+
     $(document).on('click', '#send-new-message', function(){
        var dialogId = $(this).closest('.input-group').find('#dialog-id').val();
        var message = $(this).closest('.input-group').find('#new-message').val();
@@ -33,6 +47,26 @@ $(document).ready(function(){
                }, 'fast');
            }
        });
+    });
+
+    $(document).on('click', '#room-send-new-message', function(){
+        var roomId = $(this).closest('.input-group').find('#room-id').val();
+        var message = $(this).closest('.input-group').find('#new-message').val();
+        $(this).closest('.input-group').find('#new-message').val('');
+        $.ajax({
+            method: 'post',
+            url: '/chat/' + roomId + '/send',
+            data: {
+                room_id : roomId,
+                message: message
+            },
+            success: function(res) {
+                $('#message-container').append(res);
+                $('#message-container').animate({
+                    scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
+                }, 'fast');
+            }
+        });
     });
 
     $(document).on('submit', '#roomCreateForm', function() {
