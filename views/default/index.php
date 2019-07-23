@@ -48,6 +48,17 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                             'users' => $users
                         ]); ?>
                     </li>
+                    <li id="group-template" data-room-id="" style="display: none;" class="group-row">
+                        <div class="group-panel">
+                            <div class="pull-left image">
+                                <img src="<?php echo $bundle->baseUrl . '/img/group.png'; ?>" width="50px" height="50px">
+                            </div>
+                            <div class="pull-left info">
+                                <p><span class="username"></span></p>
+                                <span class="text-status">Участников: <span class="members-count"></span></span>
+                            </div>
+                        </div>
+                    </li>
                     <?php foreach ($rooms as $room) {
                         echo $this->render('../room/_room_in_list', [
                             'room' => $room

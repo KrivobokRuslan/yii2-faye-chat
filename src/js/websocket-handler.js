@@ -33,6 +33,9 @@
                 $('#user-' + data.message.author.id).find('#income-message-user-' + data.message.author.id).css({'display':'inline-block'});
                 playAudio();
             }
+        },
+        addRoom : function(data) {
+            console.log(data);
         }
     };
     var ws = new WebSocket(wshost);

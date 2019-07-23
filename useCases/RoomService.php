@@ -6,6 +6,7 @@ use krivobokruslan\fayechat\entities\Room;
 use krivobokruslan\fayechat\entities\RoomRole;
 use krivobokruslan\fayechat\forms\RoomForm;
 use krivobokruslan\fayechat\helpers\TransactionManager;
+use krivobokruslan\fayechat\interfaces\SocketServiceInterface;
 use krivobokruslan\fayechat\repositories\RoomRepository;
 use krivobokruslan\fayechat\repositories\RoomRoleRepository;
 
@@ -15,16 +16,19 @@ class RoomService
     private $rooms;
     private $transactions;
     private $roles;
+    private $socketService;
 
     public function __construct(
         RoomRepository $rooms,
         RoomRoleRepository $roles,
-        TransactionManager $transactions
+        TransactionManager $transactions,
+        SocketServiceInterface $socketService
     )
     {
         $this->rooms = $rooms;
         $this->transactions = $transactions;
         $this->roles = $roles;
+        $this->socketService = $socketService;
     }
 
     public function create(RoomForm $form, $ownerId): Room
@@ -40,7 +44,7 @@ class RoomService
             }
         }
         $this->rooms->save($room);
-
+        $this->socketService->send('', ['event' => 'addRoom', 'room' => $room]);
         return $room;
     }
 
