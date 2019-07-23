@@ -9,7 +9,7 @@ use krivobokruslan\fayechat\helpers\TransactionManager;
 use krivobokruslan\fayechat\interfaces\SocketServiceInterface;
 use krivobokruslan\fayechat\repositories\RoomRepository;
 use krivobokruslan\fayechat\repositories\RoomRoleRepository;
-
+use krivobokruslan\fayechat\converted\Room as cRoom;
 
 class RoomService
 {
@@ -48,7 +48,7 @@ class RoomService
             if ($room->isOwner($member->id)) {
                 continue;
             }
-            $this->socketService->send('', ['event' => 'addRoom', 'room' => $room, 'userId' => $member->id]);
+            $this->socketService->send('', ['event' => 'addRoom', 'room' => new cRoom($room), 'userId' => $member->id]);
         }
 
         return $room;
