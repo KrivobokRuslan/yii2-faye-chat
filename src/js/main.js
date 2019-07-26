@@ -55,7 +55,7 @@ $(document).ready(function(){
         $(this).closest('.input-group').find('#new-message').val('');
         $.ajax({
             method: 'post',
-            url: '/chat/' + roomId + '/send',
+            url: '/room/' + roomId + '/send',
             data: {
                 room_id : roomId,
                 message: message
