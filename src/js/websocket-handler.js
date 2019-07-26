@@ -40,7 +40,19 @@
             template.find('.members-count').text(data.room.countMembers);
             $('#group-container').append(template);
             template.show();
-        }
+        },
+        newRoomMessage : function(data) {
+            var roomElem = $('#room-' + data.message.room_id);
+            if (!isEmpty(roomElem) && currentUser != data.message.author.id) {
+                roomElem.find('#message-container').append(renderMessage(data.message));
+                $('#message-container').animate({
+                    scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
+                }, 'fast');
+            } else {
+                $('#room-' + data.message.room_id).find('#income-message-room-' + data.message.room_id).css({'display':'inline-block'});
+                playAudio();
+            }
+        },
     };
     var ws = new WebSocket(wshost);
     ws.onmessage = function(evt) {
@@ -63,7 +75,7 @@
         return '<div class="direct-chat-msg right">' +
             '    <div class="direct-chat-info clearfix">' +
             '        <span class="direct-chat-name pull-right">' + data.author.username + '</span>' +
-            '        <span class="direct-chat-timestamp pull-left"> ' + data.created_at + ' </span>' +
+            '        <span class="direct-chat-timestamp pull-left"> ' + data.created_at || data.ctime + ' </span>' +
             '    </div>' +
             '    <img class="direct-chat-img" src="' + avatarUrl + '">' +
             '    <div class="direct-chat-text">' + data.message +

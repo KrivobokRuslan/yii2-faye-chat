@@ -14,7 +14,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
             <img src="<?php echo $bundle->baseUrl . '/img/group.png'; ?>" width="50px" height="50px">
         </div>
         <div class="pull-left info">
-            <p><span class="username"><?php echo $room->title ?></span></p>
+            <p><span class="username"><?php echo $room->title ?></span><span class="income-message" id="income-message-room-<?php echo $$room->id; ?>"></span></p>
             <span class="text-status">Участников: <span class="members-count"><?php echo $room->getCountMembers(); ?></span></span>
         </div>
     </div>
