@@ -146,7 +146,7 @@ class RoomMessage extends ActiveRecord
 
     public function getAuthor(): ActiveQuery
     {
-        return$this->hasOne(User::class, ['user_id' => 'author_user_id']);
+        return$this->hasOne(User::class, ['id' => 'author_user_id']);
     }
 
     public function getAttachedFiles(): ActiveQuery
