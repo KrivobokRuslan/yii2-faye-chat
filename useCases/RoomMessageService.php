@@ -41,10 +41,8 @@ class RoomMessageService
     {
         $room = $this->rooms->getById($roomId);
         $room->guardIsMember($authorId);
-        if (!$room->isOwner($authorId)) {
-            $this->roleManager->canMembers($room->id,RoomRole::MESSAGE_SEND, $authorId)){
-                throw new \DomainException('Access denied');
-            }
+        if (!$room->isOwner($authorId) && !$this->roleManager->canMembers($room->id, RoomRole::MESSAGE_SEND, $authorId)) {
+            throw new \DomainException('Access denied');
         }
         $message = RoomMessage::create($form->message, $room->id, $authorId);
         $this->messages->save($message);
