@@ -17,6 +17,7 @@ $(document).ready(function(){
 
     $(document).on('click', '.group-row', function(){
         var roomId = $(this).attr('data-room-id');
+        $('#room-' + roomId).find('.income-message').hide();
         $.ajax({
             method: 'get',
             url: '/chat/room/' + roomId,
