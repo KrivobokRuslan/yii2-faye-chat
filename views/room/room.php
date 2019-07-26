@@ -8,8 +8,8 @@
 <div class="panel panel-default" id="room-<?php echo $room->id; ?>">
     <div class="panel-body direct-chat-primary" id="message-container">
         <?php
-        if (!empty($room->lastMessages)) {
-            foreach (array_reverse($room->lastMessages) as $message) {
+        if (!empty($room->messages)) {
+            foreach ($room->messages as $message) {
                 echo $this->render('_message', [
                     'message' => $message,
                     'userId' => $userId
