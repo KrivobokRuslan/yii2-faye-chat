@@ -8,9 +8,11 @@ use krivobokruslan\fayechat\entities\RoomMessageDeleted;
 use krivobokruslan\fayechat\entities\RoomRole;
 use krivobokruslan\fayechat\forms\RoomMessageForm;
 use krivobokruslan\fayechat\helpers\TransactionManager;
+use krivobokruslan\fayechat\interfaces\SocketServiceInterface;
 use krivobokruslan\fayechat\repositories\RoomMessageDeletedRepository;
 use krivobokruslan\fayechat\repositories\RoomMessageRepository;
 use krivobokruslan\fayechat\repositories\RoomRepository;
+use yii\helpers\ArrayHelper;
 
 
 class RoomMessageService
@@ -21,13 +23,15 @@ class RoomMessageService
     private $transaction;
     private $roleManager;
     private $deletedMessage;
+    private $socketService;
 
     public function __construct(
         RoomMessageRepository $messages,
         RoomRepository $rooms,
         TransactionManager $transaction,
         RoomMessageDeletedRepository $deletedMessage,
-        RoleManager $roleManager
+        RoleManager $roleManager,
+        SocketServiceInterface $socketService
     )
     {
         $this->messages = $messages;
@@ -35,6 +39,7 @@ class RoomMessageService
         $this->transaction = $transaction;
         $this->deletedMessage = $deletedMessage;
         $this->roleManager = $roleManager;
+        $this->socketService = $socketService;
     }
 
     public function create(RoomMessageForm $form, $roomId, $authorId): RoomMessage
@@ -46,6 +51,12 @@ class RoomMessageService
         }
         $message = RoomMessage::create($form->message, $room->id, $authorId);
         $this->messages->save($message);
+        foreach ($room->members as $member) {
+            if ($message->isAuthor($member->id)) {
+                continue;
+            }
+            $this->socketService->send('', ['event' => 'newRoomMessage', 'message' => $message->convertToArray()]);
+        }
         return $message;
     }
 

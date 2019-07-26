@@ -75,7 +75,7 @@
         return '<div class="direct-chat-msg right">' +
             '    <div class="direct-chat-info clearfix">' +
             '        <span class="direct-chat-name pull-right">' + data.author.username + '</span>' +
-            '        <span class="direct-chat-timestamp pull-left"> ' + data.created_at || data.ctime + ' </span>' +
+            '        <span class="direct-chat-timestamp pull-left"> ' + data.created_at + ' </span>' +
             '    </div>' +
             '    <img class="direct-chat-img" src="' + avatarUrl + '">' +
             '    <div class="direct-chat-text">' + data.message +

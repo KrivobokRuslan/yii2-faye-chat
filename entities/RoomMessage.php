@@ -167,4 +167,19 @@ class RoomMessage extends ActiveRecord
     {
         return new RoomMessageQuery(get_called_class());
     }
+
+    public function convertToArray()
+    {
+        return [
+            'id' => $this->id,
+            'message' => $this->message,
+            'author' => [
+                'username' => $this->author->getChatUsername(),
+                'avatar' => $this->author->getChatAvatar(),
+                'id' => $this->author->getChatUserId()
+            ],
+            'room_id' => $this->room_id,
+            'created_at' => date('Y-m-d H:i:s', $this->ctime)
+        ];
+    }
 }
