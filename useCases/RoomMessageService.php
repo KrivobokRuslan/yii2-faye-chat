@@ -55,7 +55,7 @@ class RoomMessageService
             if ($message->isAuthor($member->id)) {
                 continue;
             }
-            $this->socketService->send('', ['event' => 'newRoomMessage', 'message' => $message->convertToArray()]);
+            $this->socketService->send('', ['event' => 'newRoomMessage', 'message' => $message->convertToArray(), 'userId' => $member->id]);
         }
         return $message;
     }
