@@ -26,7 +26,7 @@ class RoomMessageController extends MainController
             return $this->setErrorStatus($e->getMessage());
         }
 
-        $form = new RoomMessageForm($room);
+        $form = new RoomMessageForm();
 
         if ($form->load(\Yii::$app->request->getBodyParams(), '') && $form->validate()) {
             try {
