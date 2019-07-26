@@ -5,7 +5,7 @@
  * @var string $userId
  */
 ?>
-<div class="panel panel-default" id="room-<?php echo $room->id; ?>">
+<div class="panel panel-default" id="room-content-<?php echo $room->id; ?>">
     <div class="panel-body direct-chat-primary" id="message-container">
         <?php
         if (!empty($room->messages)) {

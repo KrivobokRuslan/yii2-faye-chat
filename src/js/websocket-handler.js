@@ -42,7 +42,7 @@
             template.show();
         },
         newRoomMessage : function(data) {
-            var roomElem = $('#room-' + data.message.room_id);
+            var roomElem = $('#room-content-' + data.message.room_id);
             if (!isEmpty(roomElem) && currentUser != data.message.author.id) {
                 roomElem.find('#message-container').append(renderMessage(data.message));
                 $('#message-container').animate({
