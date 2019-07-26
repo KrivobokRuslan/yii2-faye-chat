@@ -46,9 +46,9 @@ class RoomMessageController extends MainController
     {
         try {
             $this->service->deleteMe($id, \Yii::$app->user->id);
-            return $this->setResponseSuccessStatus();
+            return $this->setSuccessStatus();
         } catch (\DomainException $e) {
-            return $this->setResponseErrorStatus($e->getMessage());
+            return $this->setErrorStatus($e->getMessage());
         }
     }
 
@@ -57,9 +57,9 @@ class RoomMessageController extends MainController
         try {
             $message = $this->service->delete($id, \Yii::$app->user->id);
             \Yii::$app->faye->send($message->id, '/room/' . $message->room->id . '/message/delete');
-            return $this->setResponseSuccessStatus();
+            return $this->setSuccessStatus();
         } catch (\DomainException $e) {
-            return $this->setResponseErrorStatus($e->getMessage());
+            return $this->setErrorStatus($e->getMessage());
         }
     }
 

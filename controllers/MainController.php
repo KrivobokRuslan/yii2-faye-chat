@@ -17,6 +17,14 @@ class MainController extends Controller
         ];
     }
 
+    public function setSuccessStatus()
+    {
+        $this->setResponseJsonFormat();
+        return [
+            'status' => true
+        ];
+    }
+
     public function setResponseJsonFormat()
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
