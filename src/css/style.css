@@ -33,10 +33,15 @@
     height: 55px;
 }
 
+.user-row.active, .group-row.active {
+    background: #3c8dbc;
+    border-color: #3c8dbc;
+    color: #fff;
+}
+
 .user-panel, .group-panel {
     position: relative;
     width: 100%;
-    padding: 10px;
 }
 
 #user-container, #group-container {

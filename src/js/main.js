@@ -1,5 +1,12 @@
 $(document).ready(function(){
     $(document).on('click', '.user-row', function(){
+        $('.user-row').each(function(i, el) {
+            $(el).removeClass('active');
+        });
+        $('.group-row').each(function(i, el) {
+            $(el).removeClass('active');
+        });
+        $(this).addClass('active');
         var userId = $(this).attr('data-user-id');
         $('#user-' + userId).find('.income-message').hide();
         $.ajax({
@@ -16,6 +23,13 @@ $(document).ready(function(){
     });
 
     $(document).on('click', '.group-row', function(){
+        $('.user-row').each(function(i, el) {
+            $(el).removeClass('active');
+        });
+        $('.group-row').each(function(i, el) {
+            $(el).removeClass('active');
+        });
+        $(this).addClass('active');
         var roomId = $(this).attr('data-room-id');
         $('#room-' + roomId).find('.income-message').hide();
         $.ajax({
