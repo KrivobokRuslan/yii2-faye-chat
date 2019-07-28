@@ -48,7 +48,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                 <?php
                 if (!empty($room->members)) : ?>
                     <?php foreach ($room->members as $member) : ?>
-                        <li class="user-row" data-user-id="<?php echo $member->getChatUserId(); ?>">
+                        <li class="user-row" id="user-in-room-<?php echo $member->getChatUserId(); ?>" data-user-id="<?php echo $member->getChatUserId(); ?>">
                             <div class="user-panel">
                                 <div class="pull-left image">
                                     <img src="<?php echo $member->getChatAvatar() ? : $bundle->baseUrl . '/img/no-avatar.png'; ?>" width="50px" height="50px">

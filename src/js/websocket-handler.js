@@ -3,16 +3,25 @@
         userConnect : function(data) {
             $('#user-' + data.user_id + ' .user-status').removeClass('offline').addClass('online');
             $('#user-' + data.user_id + ' .text-status').text('Online');
+
+            $('#user-in-room-' + data.user_id + ' .user-status').removeClass('offline').addClass('online');
+            $('#user-in-room-' + data.user_id + ' .text-status').text('Online');
         },
         usersOnline : function(data) {
             data.users.forEach(function(item, i) {
                 $('#user-' + item + ' .user-status').removeClass('offline').addClass('online');
                 $('#user-' + item + ' .text-status').text('Online');
+
+                $('#user-in-room-' + item + ' .user-status').removeClass('offline').addClass('online');
+                $('#user-in-room-' + item + ' .text-status').text('Online');
             });
         },
         userDisconnect : function(data) {
             $('#user-' + data.user_id + ' .user-status').removeClass('inline').addClass('offline');
             $('#user-' + data.user_id + ' .text-status').text('Offline');
+
+            $('#user-in-room-' + data.user_id + ' .user-status').removeClass('inline').addClass('offline');
+            $('#user-in-room-' + data.user_id + ' .text-status').text('Offline');
         },
         userSignup : function(data) {
             var template = $('#user-container #user-template').clone().prop('id', 'user-' + data.user.id).attr('data-user-id', data.user.id);
