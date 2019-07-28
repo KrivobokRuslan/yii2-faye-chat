@@ -37,6 +37,11 @@ $(document).ready(function(){
             url: '/chat/room/' + roomId,
             success: function(res) {
                 $('#dialog-container').empty().append(res);
+                $('#user-container .user-row .user-status.online').each(function(i, el) {
+                    var cUid = $(el).closest('.user-row').attr('data-user-id');
+                    $('#user-in-room-' + cUid + ' .user-status').removeClass('offline').addClass('online');
+                    $('#user-in-room-' + cUid + ' .text-status').text('Online');
+                });
                 $('#message-container').animate({
                     scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
                 }, 'fast');
