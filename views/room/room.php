@@ -42,15 +42,26 @@
     </div>
     <div role="tabpanel" aria-labelledby="room-member-tab" class="panel panel-default tab-pane fade" id="room-members-<?php echo $room->id; ?>">
         <div class="panel-body direct-chat-primary">
-            <?php
-            if (!empty($room->members)) {
-                foreach ($room->members as $member) {
-                    echo $member->getChatUserId();
-                }
-            } else {
-                echo 'There is no messages yet...';
-            }
-            ?>
+            <ul class="list-group">
+                <?php
+                if (!empty($room->members)) : ?>
+                    <?php foreach ($room->members as $member) : ?>
+                        <li class="user-row">
+                            <div class="user-panel">
+                                <div class="pull-left image">
+                                    <img src="<?php echo $member->getChatAvatar() ? : $bundle->baseUrl . '/img/no-avatar.png'; ?>" width="50px" height="50px">
+                                </div>
+                                <div class="pull-left info">
+                                    <p><span class="username"><?php echo $member->getChatUsername(); ?></span></p>
+                                    <span class="user-status offline"></span>
+                                    <span class="text-status">Offline</span>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+            </ul>
         </div>
     </div>
 </div>

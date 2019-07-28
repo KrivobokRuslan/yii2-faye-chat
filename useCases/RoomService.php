@@ -62,7 +62,7 @@ class RoomService
     {
         $room = $this->rooms->getById($id);
         $messages = $this->messages->getByRoomForUser($room->id, $userId);
-        $roomAdvanced = new cRoom($room, $messages);
+        $roomAdvanced = new cRoom($room, $messages, $room->members);
         return $roomAdvanced;
     }
 //
