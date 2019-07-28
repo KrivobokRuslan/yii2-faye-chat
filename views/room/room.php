@@ -4,6 +4,8 @@
  * @var \krivobokruslan\fayechat\entities\Room $room
  * @var string $userId
  */
+
+$bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\ChatAssets::class);
 ?>
 
 <ul class="nav nav-tabs" id="chatsTab" role="tablist">
@@ -42,7 +44,7 @@
     </div>
     <div role="tabpanel" aria-labelledby="room-member-tab" class="panel panel-default tab-pane fade" id="room-members-<?php echo $room->id; ?>">
         <div class="panel-body direct-chat-primary">
-            <ul class="list-group">
+            <ul class="list-group" style="list-style: none outside none">
                 <?php
                 if (!empty($room->members)) : ?>
                     <?php foreach ($room->members as $member) : ?>
