@@ -95,12 +95,15 @@ class RoomService
     public function leave($id, $userId): void
     {
         $room = $this->rooms->getById($id);
-        if ($room->isOwner($userId)) {
-            // TODO it's need to set new owner from the moderators when the owner leave
-            return;
+        if ($room->isOwner($userId) && $room->getCountMembers()) {
+            throw new \DomainException('Вы не можете покинуть комнату пока в ней есть другие участники');
         }
         $room->detachMember($userId);
         $this->rooms->save($room);
+        if ($room->getCountMembers() <= 0) {
+            $room->delete();
+            return;
+        }
         foreach ($room->members as $member) {
             $this->socketService->send('', ['event' => 'leaveRoom', 'roomId' => $room->id, 'userId' => $member, 'memberId' => $userId]);
         }
