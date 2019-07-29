@@ -28,6 +28,20 @@ $(document).ready(function(){
         });
     });
 
+    $(document).on('click', '.room-leave', function() {
+       var roomId = $(this.attar('data-room-id'));
+       $.ajax({
+           method: 'get',
+           url: '/room/' + roomId + '/leave',
+           success: function(res) {
+               $('#group-container #room-' + roomId).remove();
+               if($('#room-content-' + roomId)) {
+                   $('#dialog-container').empty();
+               }
+           }
+       });
+    });
+
     $(document).on('click', '.group-row', function(){
         $('.user-row').each(function(i, el) {
             $(el).removeClass('active');
