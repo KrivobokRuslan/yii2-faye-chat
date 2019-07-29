@@ -65,6 +65,9 @@
         banRoomMember : function(data) {
             $('#group-container #room-' + data.roomId).remove();
             $('#dialog-container').empty();
+        },
+        changeRoomMemberCount : function(data) {
+            $('#group-container #room-' + data.roomId).find('.members-count').text(data.countMembers);
         }
     };
     var ws = new WebSocket(wshost);

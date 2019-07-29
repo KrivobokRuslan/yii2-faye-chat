@@ -122,6 +122,7 @@ class RoomService
         foreach ($form->members as $member) {
             $this->socketService->send('', ['event' => 'banRoomMember', 'roomId' => $room->id, 'userId' => $member]);
         }
+        $this->socketService->send('', ['event' => 'changeRoomMemberCount', 'roomId' => $room->id, 'userId' => $userId, 'countMembers' => $room->getCountMembers()]);
     }
 
 //    public function assignRole(RoomMemberRolesForm $form, $roomId, $userId): void
