@@ -6,6 +6,12 @@ $(document).ready(function(){
         $('.group-row').each(function(i, el) {
             $(el).removeClass('active');
         });
+        $('.nav-tabs .nav-item').each(function(i, el) {
+            $(el).removeClass('active');
+        });
+        $('.nav-tabs .nav-item:first-child').addClass('active');
+        $('#group-container').removeClass('active in');
+        $('#user-container').addClass('active in');
         var userId = $(this).attr('data-user-id');
         $('#user-' + userId).addClass('active');
         $('#user-' + userId).find('.income-message').hide();
