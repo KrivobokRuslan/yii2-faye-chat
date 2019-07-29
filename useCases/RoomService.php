@@ -95,7 +95,7 @@ class RoomService
     public function leave($id, $userId): void
     {
         $room = $this->rooms->getById($id);
-        if ($room->isOwner($userId) && $room->getCountMembers()) {
+        if ($room->isOwner($userId) && $room->getCountMembers() > 1) {
             throw new \DomainException('Вы не можете покинуть комнату пока в ней есть другие участники');
         }
         $room->detachMember($userId);
