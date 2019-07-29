@@ -105,7 +105,13 @@ class RoomService
             return;
         }
         foreach ($room->members as $member) {
-            $this->socketService->send('', ['event' => 'leaveRoom', 'roomId' => $room->id, 'userId' => $member, 'memberId' => $userId, 'countMembers' => $room->getCountMembers()]);
+            $this->socketService->send('', [
+                'event' => 'leaveRoom',
+                'roomId' => $room->id,
+                'userId' => $member->id,
+                'memberId' => $userId,
+                'countMembers' => $room->getCountMembers()
+            ]);
         }
     }
 
