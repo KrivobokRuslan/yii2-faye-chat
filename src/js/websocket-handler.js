@@ -49,6 +49,7 @@
                     var template = $('#group-container #group-template').clone().prop('id', 'room-' + data.room.id).attr('data-room-id', data.room.id);
                     template.find('.username').text(data.room.title);
                     template.find('.members-count').text(data.room.countMembers);
+                    template.find('.room-leave').attr('data-room-id', data.room.id);
                     $('#group-container').append(template);
                     template.show();
                 }
