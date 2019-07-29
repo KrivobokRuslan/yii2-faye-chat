@@ -2,7 +2,7 @@
 /**
  * @var \yii\web\View $this
  * @var \krivobokruslan\fayechat\entities\User $member
- * @var string $roomId
+ * @var \krivobokruslan\fayechat\entities\Room $room
  */
 
 $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\ChatAssets::class);
@@ -19,12 +19,14 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
             <span class="text-status">Offline</span>
         </div>
     </div>
-    <div
-        class="room-member-remove btn btn-danger"
-        style="float: right;"
-        data-user-id="<?php echo $member->getChatUserId(); ?>"
-        data-room-id="<?php echo $roomId; ?>"
-    >
-        <i class="glyphicon glyphicon-ban-circle"></i>
-    </div>
+    <?php if ($room->isOwner($member->id)) : ?>
+        <div
+                class="room-member-remove btn btn-danger"
+                style="float: right;"
+                data-user-id="<?php echo $member->getChatUserId(); ?>"
+                data-room-id="<?php echo $room->id; ?>"
+        >
+            <i class="glyphicon glyphicon-ban-circle"></i>
+        </div>
+    <?php endif; ?>
 </li>

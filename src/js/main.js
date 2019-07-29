@@ -59,7 +59,12 @@ $(document).ready(function(){
                 members : [userId]
             },
             success: function(res) {
-                $('#user-in-room-' + userId).remove();
+                if (res.status) {
+                    $('#user-in-room-' + userId).remove();
+                } else {
+                    alert(res.error);
+                }
+
             }
         });
         return false;

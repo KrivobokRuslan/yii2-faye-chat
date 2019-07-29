@@ -63,7 +63,8 @@
             }
         },
         banRoomMember : function(data) {
-            console.log(data);
+            $('#group-container #room-' + data.roomId).remove();
+            $('#dialog-container').empty();
         }
     };
     var ws = new WebSocket(wshost);
