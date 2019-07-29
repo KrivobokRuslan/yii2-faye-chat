@@ -29,7 +29,7 @@ $(document).ready(function(){
     });
 
     $(document).on('click', '.room-leave', function() {
-       var roomId = $(this.attr('data-room-id'));
+       var roomId = $(this).attr('data-room-id');
        $.ajax({
            method: 'get',
            url: '/room/' + roomId + '/leave',
