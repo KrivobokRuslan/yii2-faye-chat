@@ -49,7 +49,13 @@
                     var template = $('#group-container #group-template').clone().prop('id', 'room-' + data.room.id).attr('data-room-id', data.room.id);
                     template.find('.username').text(data.room.title);
                     template.find('.members-count').text(data.room.countMembers);
-                    template.find('.room-leave').attr('data-room-id', data.room.id);
+                    if (el == data.room.owner_user_id) {
+                        template.find('.room-delete').attr('data-room-id', data.room.id);
+                        template.find('.room-leave').attr('data-room-id', data.room.id).hide();
+                    } else {
+                        template.find('.room-delete').attr('data-room-id', data.room.id).hide();
+                        template.find('.room-leave').attr('data-room-id', data.room.id);
+                    }
                     $('#group-container').append(template);
                     template.show();
                 }
@@ -69,7 +75,12 @@
         },
         banRoomMember : function(data) {
             $('#group-container #room-' + data.roomId).remove();
-            $('#dialog-container').empty();
+            var roomElem = $('#room-content-' + data.roomId);
+            if (!isEmpty(roomElem)) {
+                $('#dialog-container').empty();
+                alert('Вас исключили из комнаты');
+            }
+
         },
         changeRoomMemberCount : function(data) {
             $('#group-container #room-' + data.roomId).find('.members-count').text(data.countMembers);
@@ -77,6 +88,14 @@
         leaveRoom : function(data) {
             $('#user-in-room-' + data.memberId).remove();
             $('#group-container #room-' + data.roomId).find('.members-count').text(data.countMembers);
+        },
+        deleteRoom : function(data) {
+            $('#group-container #room-' + data.roomId).remove();
+            var roomElem = $('#room-content-' + data.roomId);
+            if (!isEmpty(roomElem)) {
+                $('#dialog-container').empty();
+                alert('Комната была удалена');
+            }
         }
     };
     var ws = new WebSocket(wshost);

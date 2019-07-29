@@ -60,6 +60,9 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
                             <div class="pull-right room-leave" data-room-id="" style="font-size: 25px; margin-top: 10px; margin-right: 5px;">
                                 <span class="glyphicon glyphicon-log-out"></span>
                             </div>
+                            <div class="pull-right room-delete" data-room-id="" style="font-size: 25px; margin-top: 10px; margin-right: 5px;">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </div>
                         </div>
                     </li>
                     <?php foreach ($rooms as $room) {

@@ -47,6 +47,27 @@ $(document).ready(function(){
        return false;
     });
 
+    $(document).on('click', '.room-delete', function() {
+        if (confirm('Вы действительно желаете удалить комнату? Вся история сообщений будет потеряна!')) {
+            var roomId = $(this).attr('data-room-id');
+            $.ajax({
+                method: 'delete',
+                url: '/room/' + roomId,
+                success: function(res) {
+                    if (res.status) {
+                        $('#group-container #room-' + roomId).remove();
+                        if($('#room-content-' + roomId)) {
+                            $('#dialog-container').empty();
+                        }
+                    } else {
+                        alert(res.error);
+                    }
+                }
+            });
+        }
+        return false;
+    });
+
     $(document).on('click', '.group-row', function(){
         $('.user-row').each(function(i, el) {
             $(el).removeClass('active');

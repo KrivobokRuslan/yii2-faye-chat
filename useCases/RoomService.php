@@ -115,6 +115,21 @@ class RoomService
         }
     }
 
+    public function delete($id, $userId): void
+    {
+        $room = $this->rooms->getById($id);
+        if (!$room->isOwner($userId)) {
+            throw new \DomainException('У вас недостаточно прав');
+        }
+        $room->delete();
+        foreach ($room->members as $member) {
+            $this->socketService->send('', [
+                'event' => 'deleteRoom',
+                'roomId' => $room->id
+            ]);
+        }
+    }
+
     public function ban(RoomMembersForm $form, $roomId, $userId)
     {
         $room = $this->rooms->getById($roomId);

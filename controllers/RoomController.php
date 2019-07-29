@@ -63,4 +63,14 @@ class RoomController extends MainController
             return $this->setErrorStatus($e->getMessage());
         }
     }
+
+    public function actionDelete($roomId)
+    {
+        try {
+            $this->service->delete($roomId, \Yii::$app->user->id);
+            return $this->setSuccessStatus();
+        } catch (\DomainException $e) {
+            return $this->setErrorStatus($e->getMessage());
+        }
+    }
 }
