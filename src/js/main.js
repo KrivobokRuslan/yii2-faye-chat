@@ -128,6 +128,7 @@ $(document).ready(function(){
                message: message
            },
            success: function(res) {
+               $('.no-messages').remove();
                $('#message-container').append(res);
                $('#message-container').animate({
                    scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
@@ -148,6 +149,7 @@ $(document).ready(function(){
                 message: message
             },
             success: function(res) {
+                $('.no-messages').remove();
                 $('#message-container').append(res);
                 $('#message-container').animate({
                     scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'

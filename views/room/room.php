@@ -12,7 +12,10 @@
         <a class="nav-link active" data-toggle="tab" role="tab" aria-controls="user-container" aria-selected="true" href="#room-content-<?php echo $room->id; ?>">Сообщения</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" role="tab" aria-controls="group-container" aria-selected="false" href="#room-members-<?php echo $room->id; ?>">Участники</a>
+        <a class="nav-link" data-toggle="tab" role="tab" aria-controls="group-container" aria-selected="false" href="#room-members-<?php echo $room->id; ?>">
+            Участники
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
     </li>
 </ul>
 <div class="tab-content" id="chatsTabContent">
@@ -27,7 +30,7 @@
                     ]);
                 }
             } else {
-                echo 'There is no messages yet...';
+                echo '<span class="no-messages">Еще нет сообщений...</span>';
             }
             ?>
         </div>

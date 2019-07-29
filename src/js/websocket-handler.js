@@ -34,6 +34,7 @@
         newMessage : function(data) {
             var dialogElem = $('#dialog-' + data.message.dialog_id);
             if (!isEmpty(dialogElem) && currentUser != data.message.author.id) {
+                $('.no-messages').remove();
                 dialogElem.find('#message-container').append(renderMessage(data.message));
                 $('#message-container').animate({
                     scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
@@ -64,6 +65,7 @@
         newRoomMessage : function(data) {
             var roomElem = $('#room-content-' + data.message.room_id);
             if (!isEmpty(roomElem) && currentUser != data.message.author.id) {
+                $('.no-messages').remove();
                 roomElem.find('#message-container').append(renderMessage(data.message));
                 $('#message-container').animate({
                     scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
