@@ -44,13 +44,13 @@ class RoomController extends MainController
         ]);
     }
 
-    public function actionBan($id)
+    public function actionBan($roomId)
     {
         $form = new RoomMembersForm();
 
         if ($form->load(\Yii::$app->request->getBodyParams(), '') && $form->validate()) {
             try {
-                $this->service->ban($form, $id, \Yii::$app->user->id);
+                $this->service->ban($form, $roomId, \Yii::$app->user->id);
                 return $this->setSuccessStatus();
             } catch (\DomainException $e) {
                 return $this->setErrorStatus($e->getMessage());
