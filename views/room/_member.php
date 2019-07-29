@@ -3,6 +3,8 @@
  * @var \yii\web\View $this
  * @var \krivobokruslan\fayechat\entities\User $member
  */
+
+$bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\ChatAssets::class);
 ?>
 
 <li class="user-row" id="user-in-room-<?php echo $member->getChatUserId(); ?>" data-user-id="<?php echo $member->getChatUserId(); ?>">
