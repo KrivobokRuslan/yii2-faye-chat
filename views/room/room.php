@@ -50,7 +50,8 @@
                         if ($member->id == $userId) continue;
                         echo $this->render('_member', [
                             'member' => $member,
-                            'room' => $room
+                            'room' => $room,
+                            'userId' => $userId
                         ]);
                     }
                 } ?>

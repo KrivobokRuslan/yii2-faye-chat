@@ -112,7 +112,7 @@ class RoomService
     public function ban(RoomMembersForm $form, $roomId, $userId)
     {
         $room = $this->rooms->getById($roomId);
-        if (!$this->roleManager->canMembers($room->id, RoomRole::MEMBER_DISMISS, $userId)) {
+        if (!$room->isOwner($userId) && !$this->roleManager->canMembers($room->id, RoomRole::MEMBER_DISMISS, $userId)) {
             throw new \DomainException('У вас недостаточно прав');
         }
         foreach ($form->members as $member) {
