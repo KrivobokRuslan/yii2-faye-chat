@@ -24,12 +24,8 @@ class RoomController extends MainController
         $form->addOwner(\Yii::$app->user->id);
         if ($form->load(\Yii::$app->request->post()) && $form->validate()) {
             try {
-                $room = $this->service->create($form, \Yii::$app->user->id);
-                return [
-                    'roomInListTemplate' => $this->renderPartial('_room_in_list', [
-                        'room' => $room
-                    ])
-                ];
+                $this->service->create($form, \Yii::$app->user->id);
+                return $this->setSuccessStatus();
             } catch (\DomainException $e) {
                 return $this->setErrorStatus($e->getMessage());
             }
