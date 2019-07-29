@@ -34,9 +34,13 @@ $(document).ready(function(){
            method: 'get',
            url: '/room/' + roomId + '/leave',
            success: function(res) {
-               $('#group-container #room-' + roomId).remove();
-               if($('#room-content-' + roomId)) {
-                   $('#dialog-container').empty();
+               if (res.status) {
+                   $('#group-container #room-' + roomId).remove();
+                   if($('#room-content-' + roomId)) {
+                       $('#dialog-container').empty();
+                   }
+               } else {
+                   alert(res.error);
                }
            }
        });
