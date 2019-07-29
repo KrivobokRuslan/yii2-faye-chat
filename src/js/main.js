@@ -6,8 +6,8 @@ $(document).ready(function(){
         $('.group-row').each(function(i, el) {
             $(el).removeClass('active');
         });
-        $(this).addClass('active');
         var userId = $(this).attr('data-user-id');
+        $('#user-' + userId).addClass('active');
         $('#user-' + userId).find('.income-message').hide();
         $.ajax({
             method: 'post',

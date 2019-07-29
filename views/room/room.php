@@ -46,23 +46,14 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
         <div class="panel-body direct-chat-primary">
             <ul class="list-group" style="list-style: none outside none">
                 <?php
-                if (!empty($room->members)) : ?>
-                    <?php foreach ($room->members as $member) : ?>
-                        <li class="user-row" id="user-in-room-<?php echo $member->getChatUserId(); ?>" data-user-id="<?php echo $member->getChatUserId(); ?>">
-                            <div class="user-panel">
-                                <div class="pull-left image">
-                                    <img src="<?php echo $member->getChatAvatar() ? : $bundle->baseUrl . '/img/no-avatar.png'; ?>" width="50px" height="50px">
-                                </div>
-                                <div class="pull-left info">
-                                    <p><span class="username"><?php echo $member->getChatUsername(); ?></span></p>
-                                    <span class="user-status offline"></span>
-                                    <span class="text-status">Offline</span>
-                                </div>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-
+                if (!empty($room->members)) {
+                    foreach ($room->members as $member) {
+                        if ($member->id == $userId) continue;
+                        echo $this->render('_member', [
+                            'member' => $member
+                        ]);
+                    }
+                } ?>
             </ul>
         </div>
     </div>
