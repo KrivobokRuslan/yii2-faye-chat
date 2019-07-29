@@ -44,11 +44,15 @@
             }
         },
         addRoom : function(data) {
-            var template = $('#group-container #group-template').clone().prop('id', 'room-' + data.room.id).attr('data-room-id', data.room.id);
-            template.find('.username').text(data.room.title);
-            template.find('.members-count').text(data.room.countMembers);
-            $('#group-container').append(template);
-            template.show();
+            data.room.members.forEach(function(el) {
+                if (el.id != currentUser) {
+                    var template = $('#group-container #group-template').clone().prop('id', 'room-' + data.room.id).attr('data-room-id', data.room.id);
+                    template.find('.username').text(data.room.title);
+                    template.find('.members-count').text(data.room.countMembers);
+                    $('#group-container').append(template);
+                    template.show();
+                }
+            });
         },
         newRoomMessage : function(data) {
             var roomElem = $('#room-content-' + data.message.room_id);
