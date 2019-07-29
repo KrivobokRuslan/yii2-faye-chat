@@ -49,6 +49,12 @@ $(document).ready(function(){
         });
     });
 
+    $(document).on('click', '.room-member-remove', function(){
+        var userId = $(this).attr('data-user-id');
+        var roomId = $(this).attr('data-room-id');
+        console.log(userId, roomId);
+    });
+
     $(document).on('click', '#send-new-message', function(){
        var dialogId = $(this).closest('.input-group').find('#dialog-id').val();
        var message = $(this).closest('.input-group').find('#new-message').val();

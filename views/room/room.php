@@ -49,7 +49,8 @@
                     foreach ($room->members as $member) {
                         if ($member->id == $userId) continue;
                         echo $this->render('_member', [
-                            'member' => $member
+                            'member' => $member,
+                            'roomId' => $room->id
                         ]);
                     }
                 } ?>
