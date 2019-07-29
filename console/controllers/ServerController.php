@@ -20,9 +20,11 @@ class ServerController extends Controller
 
             $inner_tcp_worker->onMessage = function($connection, $data) use (&$users) {
                 $data = json_decode($data);
-                if (property_exists($data, 'userId') && isset($users[$data->userId])) {
-                    foreach ($users[$data->userId] as $webconnection) {
-                        $webconnection->send(json_encode($data));
+                if (property_exists($data, 'userId')) {
+                    if (isset($users[$data->userId])) {
+                        foreach ($users[$data->userId] as $webconnection) {
+                            $webconnection->send(json_encode($data));
+                        }
                     }
                 } else {
                     foreach ($users as $webconnections) {
