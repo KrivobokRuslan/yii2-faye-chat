@@ -52,7 +52,17 @@ $(document).ready(function(){
     $(document).on('click', '.room-member-remove', function(){
         var userId = $(this).attr('data-user-id');
         var roomId = $(this).attr('data-room-id');
-        console.log(userId, roomId);
+        $.ajax({
+            method: 'post',
+            url: '/room/' + roomId + '/ban',
+            data: {
+                members : [userId]
+            },
+            success: function(res) {
+                $('#user-in-room-' + userId).remove();
+            }
+        });
+        return false;
     });
 
     $(document).on('click', '#send-new-message', function(){

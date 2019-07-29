@@ -3,6 +3,7 @@
 namespace krivobokruslan\fayechat\controllers;
 
 use krivobokruslan\fayechat\forms\RoomForm;
+use krivobokruslan\fayechat\forms\RoomMembersForm;
 use krivobokruslan\fayechat\useCases\RoomService;
 use yii\base\Module;
 
@@ -41,5 +42,19 @@ class RoomController extends MainController
             'room' => $this->service->view($roomId, \Yii::$app->user->id),
             'userId' => \Yii::$app->user->id
         ]);
+    }
+
+    public function actionBan($id)
+    {
+        $form = new RoomMembersForm();
+
+        if ($form->load(\Yii::$app->request->getBodyParams(), '') && $form->validate()) {
+            try {
+                $this->service->ban($form, $id, \Yii::$app->user->id);
+                return $this->setSuccessStatus();
+            } catch (\DomainException $e) {
+                return $this->setErrorStatus($e->getMessage());
+            }
+        }
     }
 }

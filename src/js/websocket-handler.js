@@ -62,6 +62,9 @@
                 playAudio();
             }
         },
+        banRoomMember : function(data) {
+            console.log(data);
+        }
     };
     var ws = new WebSocket(wshost);
     ws.onmessage = function(evt) {

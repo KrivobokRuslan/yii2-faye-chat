@@ -2,9 +2,11 @@
 
 namespace krivobokruslan\fayechat\useCases;
 
+use krivobokruslan\fayechat\components\role_manager\RoleManager;
 use krivobokruslan\fayechat\entities\Room;
 use krivobokruslan\fayechat\entities\RoomRole;
 use krivobokruslan\fayechat\forms\RoomForm;
+use krivobokruslan\fayechat\forms\RoomMembersForm;
 use krivobokruslan\fayechat\helpers\TransactionManager;
 use krivobokruslan\fayechat\interfaces\SocketServiceInterface;
 use krivobokruslan\fayechat\repositories\RoomMessageRepository;
@@ -19,13 +21,15 @@ class RoomService
     private $roles;
     private $socketService;
     private $messages;
+    private $roleManager;
 
     public function __construct(
         RoomRepository $rooms,
         RoomRoleRepository $roles,
         TransactionManager $transactions,
         SocketServiceInterface $socketService,
-        RoomMessageRepository $messages
+        RoomMessageRepository $messages,
+        RoleManager $roleManager
     )
     {
         $this->rooms = $rooms;
@@ -33,6 +37,7 @@ class RoomService
         $this->roles = $roles;
         $this->socketService = $socketService;
         $this->messages = $messages;
+        $this->roleManager = $roleManager;
     }
 
     public function create(RoomForm $form, $ownerId): Room
@@ -71,7 +76,7 @@ class RoomService
 //        $user = $this->users->get($userId);
 //        return $this->rooms->getByApplicationForUser($appIdentifier, $user->user_id);
 //    }
-//
+
 //    public function addMembers(RoomMembersForm $form, $roomId, $userId): UserDataProvider
 //    {
 //        $memberRole = $this->roles->getRoleBySlug(RoomRole::ROLE_MEMBER);
@@ -92,7 +97,7 @@ class RoomService
 //
 //        return new UserDataProvider(['query' => User::find()->where(['in', 'user_id', $form->members])]);
 //    }
-//
+
 //    public function leave($slug, $userId): void
 //    {
 //        $room = $this->rooms->getBySlug($slug);
@@ -103,17 +108,22 @@ class RoomService
 //        $room->detachMember($userId);
 //        $this->rooms->save($room);
 //    }
-//
-//    public function dismiss(RoomMembersForm $form, $roomId, $userId)
-//    {
-//        $room = $this->rooms->getById($roomId);
-//        $room->checkPermissionMember($userId, RoomRole::MEMBER_DISMISS);
-//        foreach ($form->members as $member) {
-//            $room->detachMember($member);
-//        }
-//        $this->rooms->save($room);
-//    }
-//
+
+    public function ban(RoomMembersForm $form, $roomId, $userId)
+    {
+        $room = $this->rooms->getById($roomId);
+        if (!$this->roleManager->canMembers($room->id, RoomRole::MEMBER_DISMISS, $userId)) {
+            throw new \DomainException('У вас недостаточно прав');
+        }
+        foreach ($form->members as $member) {
+            $room->detachMember($member);
+        }
+        $this->rooms->save($room);
+        foreach ($form->members as $member) {
+            $this->socketService->send('', ['event' => 'banRoomMember', 'roomId' => $room->id, 'userId' => $member]);
+        }
+    }
+
 //    public function assignRole(RoomMemberRolesForm $form, $roomId, $userId): void
 //    {
 //        $room = $this->rooms->getById($roomId);
