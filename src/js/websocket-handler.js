@@ -76,6 +76,7 @@
         },
         leaveRoom : function(data) {
             $('#user-in-room-' + data.memberId).remove();
+            $('#group-container #room-' + data.roomId).find('.members-count').text(data.countMembers);
         }
     };
     var ws = new WebSocket(wshost);
