@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \yii\web\View $this
- * @var \krivobokruslan\fayechat\entities\Room $room
+ * @var \krivobokruslan\fayechat\converted\Room $room
  * @var string $userId
  */
 

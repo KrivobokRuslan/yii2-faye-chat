@@ -2,7 +2,7 @@
 /**
  * @var \yii\web\View $this
  * @var \krivobokruslan\fayechat\entities\User $member
- * @var \krivobokruslan\fayechat\entities\Room $room
+ * @var \krivobokruslan\fayechat\converted\Room $room
  */
 
 $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\ChatAssets::class);
