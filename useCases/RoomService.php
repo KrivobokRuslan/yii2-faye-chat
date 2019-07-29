@@ -53,7 +53,7 @@ class RoomService
             }
         }
         $this->rooms->save($room);
-        $this->socketService->send('', ['event' => 'addRoom', 'room' => new cRoom($room, [], $room->members)]);
+        $this->socketService->send('', ['event' => 'addRoom', 'room' => new cRoom($room, [], $form->members)]);
         return $room;
     }
 
