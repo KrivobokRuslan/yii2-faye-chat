@@ -118,11 +118,12 @@ class RoomService
     public function delete($id, $userId): void
     {
         $room = $this->rooms->getById($id);
+        $members = $room->members;
         if (!$room->isOwner($userId)) {
             throw new \DomainException('У вас недостаточно прав');
         }
         $room->delete();
-        foreach ($room->members as $member) {
+        foreach ($members as $member) {
             $this->socketService->send('', [
                 'event' => 'deleteRoom',
                 'roomId' => $room->id
