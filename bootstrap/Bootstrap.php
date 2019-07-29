@@ -16,7 +16,8 @@ class Bootstrap implements BootstrapInterface
             'POST chat/room' => 'faye-chat/room/create',
             'GET chat/room/<roomId:\d+>' => 'faye-chat/room/view',
             'POST room/<roomId:\d+>/send' => 'faye-chat/room-message/create',
-            'POST room/<roomId:\d+>/ban' => 'faye-chat/room/ban'
+            'POST room/<roomId:\d+>/ban' => 'faye-chat/room/ban',
+            'GET room/<roomId:\d+>/leave' => 'faye-chat/room/leave'
         ], false);
     }
 }

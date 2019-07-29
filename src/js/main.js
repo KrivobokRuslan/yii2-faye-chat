@@ -40,6 +40,7 @@ $(document).ready(function(){
                }
            }
        });
+       return false;
     });
 
     $(document).on('click', '.group-row', function(){

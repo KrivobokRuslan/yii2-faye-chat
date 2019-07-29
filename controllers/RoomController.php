@@ -53,4 +53,14 @@ class RoomController extends MainController
             }
         }
     }
+
+    public function actionLeave($roomId)
+    {
+        try {
+            $this->service->leave($roomId, \Yii::$app->user->id);
+            return $this->setSuccessStatus();
+        } catch (\DomainException $e) {
+            return $this->setErrorStatus($e->getMessage());
+        }
+    }
 }

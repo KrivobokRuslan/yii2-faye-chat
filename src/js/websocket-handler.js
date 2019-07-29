@@ -72,6 +72,9 @@
         },
         changeRoomMemberCount : function(data) {
             $('#group-container #room-' + data.roomId).find('.members-count').text(data.countMembers);
+        },
+        leaveRoom : function(data) {
+            $('#user-in-room-' + data.memberId).remove();
         }
     };
     var ws = new WebSocket(wshost);

@@ -92,16 +92,19 @@ class RoomService
 //        return new UserDataProvider(['query' => User::find()->where(['in', 'user_id', $form->members])]);
 //    }
 
-//    public function leave($slug, $userId): void
-//    {
-//        $room = $this->rooms->getBySlug($slug);
-//        if ($room->isOwner($userId)) {
-//            // TODO it's need to set new owner from the moderators when the owner leave
-//            return;
-//        }
-//        $room->detachMember($userId);
-//        $this->rooms->save($room);
-//    }
+    public function leave($id, $userId): void
+    {
+        $room = $this->rooms->getById($id);
+        if ($room->isOwner($userId)) {
+            // TODO it's need to set new owner from the moderators when the owner leave
+            return;
+        }
+        $room->detachMember($userId);
+        $this->rooms->save($room);
+        foreach ($room->members as $member) {
+            $this->socketService->send('', ['event' => 'leaveRoom', 'roomId' => $room->id, 'userId' => $member, 'memberId' => $userId]);
+        }
+    }
 
     public function ban(RoomMembersForm $form, $roomId, $userId)
     {
