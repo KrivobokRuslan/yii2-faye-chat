@@ -26,7 +26,7 @@ use kartik\select2\Select2;
                                 'data-room-id' => $roomId
                             ]
                         ]); ?>
-                        <?php echo $form->field($model, 'members')->widget(\kartik\select2\Select2::class, [
+                        <?php echo $form->field($model, 'members')->widget(Select2::class, [
                             'data' => \yii\helpers\ArrayHelper::map($users, 'id', 'username'),
                             'options' => [
                                 'placeholder' => 'Выберите пользователя',
