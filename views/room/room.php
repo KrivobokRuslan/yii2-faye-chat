@@ -16,14 +16,14 @@
     <li class="nav-item">
         <a class="nav-link" data-toggle="tab" role="tab" aria-controls="group-container" aria-selected="false" href="#room-members-<?php echo $room->id; ?>">
             Участники
-            <?php if($room->isOwner($userId)) {
-                echo $this->render('_add_members_form', [
-                    'model' => $roomMembersForm,
-                    'users' => $users,
-                    'roomId' => $room->id
-                ]);
-            } ?>
         </a>
+        <?php if($room->isOwner($userId)) {
+            echo $this->render('_add_members_form', [
+                'model' => $roomMembersForm,
+                'users' => $users,
+                'roomId' => $room->id
+            ]);
+        } ?>
     </li>
 </ul>
 <div class="tab-content" id="chatsTabContent">
