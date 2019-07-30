@@ -13,18 +13,18 @@
     <li class="nav-item active">
         <a class="nav-link active" data-toggle="tab" role="tab" aria-controls="user-container" aria-selected="true" href="#room-content-<?php echo $room->id; ?>">Сообщения</a>
     </li>
-    <?php if($room->isOwner($userId)) : ?>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" role="tab" aria-controls="group-container" aria-selected="false" href="#room-members-<?php echo $room->id; ?>">
-                Участники
-                <?php echo $this->render('_add_members_form', [
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" role="tab" aria-controls="group-container" aria-selected="false" href="#room-members-<?php echo $room->id; ?>">
+            Участники
+            <?php if($room->isOwner($userId)) {
+                echo $this->render('_add_members_form', [
                     'model' => $roomMembersForm,
                     'users' => $users,
                     'roomId' => $room->id
-                ]); ?>
-            </a>
-        </li>
-    <?php endif; ?>
+                ]);
+            } ?>
+        </a>
+    </li>
 </ul>
 <div class="tab-content" id="chatsTabContent">
     <div role="tabpanel" aria-labelledby="room-message-tab" class="panel panel-default tab-pane fade active in" id="room-content-<?php echo $room->id; ?>">
