@@ -96,7 +96,8 @@
                         memberTemplate.find('.user-status.offline').removeClass('offline').addClass('online');
                         memberTemplate.find('.text-status').text('Online');
                     }
-                    roomEl.find('#room-members-' + data.roomId + ' .list-group').append(memberTemplate);
+                    $('#room-members-' + data.roomId + ' .list-group').append(memberTemplate);
+                    memberTemplate.show();
                 });
             }
         },
