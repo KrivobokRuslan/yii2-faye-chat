@@ -183,8 +183,8 @@ $(document).ready(function(){
             data: $(this).serialize(),
             success: function(response) {
                 if (response.status) {
-                    $('#createRoomModal').modal('hide');
-                    $('#roomCreateForm').get(0).reset();
+                    $('#addRoomMembersModal').modal('hide');
+                    $('#roomMembersForm').get(0).reset();
                 } else {
                     alert(response.error);
                 }

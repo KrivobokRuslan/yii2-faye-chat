@@ -2,6 +2,7 @@
 
 namespace krivobokruslan\fayechat\repositories;
 
+use krivobokruslan\fayechat\dataProviders\UserDataProvider;
 use krivobokruslan\fayechat\entities\User;
 
 class UserRepository
@@ -25,6 +26,6 @@ class UserRepository
 
     public function getUsersByIds($ids): array
     {
-        return User::find()->where(['in', 'id', $ids])->all();
+        return (new UserDataProvider(['query' => User::find()->where(['in', 'id', $ids])]))->getModels();
     }
 }
