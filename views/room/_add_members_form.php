@@ -7,7 +7,7 @@ use kartik\select2\Select2;
  * @var string $roomId
  */
 ?>
-<span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addRoomMembersModal"></span>
+<span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addRoomMembersModal" style="position: absolute; right: 0; top: 14px;"></span>
 <div class="modal fade" id="addRoomMembersModal" tabindex="-1" role="dialog" aria-labelledby="addRoomMembersModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -81,7 +81,7 @@ class RoomController extends MainController
     {
         $form = new RoomMembersForm();
 
-        if ($form->load(\Yii::$app->request->getBodyParams(), '') && $form->validate()) {
+        if ($form->load(\Yii::$app->request->getBodyParams()) && $form->validate()) {
             try {
                 $this->service->addMembers($form, $roomId, \Yii::$app->user->id);
                 return $this->setSuccessStatus();
