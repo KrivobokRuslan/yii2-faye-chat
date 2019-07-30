@@ -7,6 +7,7 @@
  * @var \krivobokruslan\fayechat\entities\User[] $users
  */
 
+$bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\ChatAssets::class);
 ?>
 
 <ul class="nav nav-tabs" id="chatsTab" role="tablist">
