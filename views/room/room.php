@@ -17,7 +17,7 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" role="tab" aria-controls="group-container" aria-selected="false" href="#room-members-<?php echo $room->id; ?>">
                 Участники
-                <?php echo $this->render('_add_members_modal', [
+                <?php echo $this->render('_add_members_form', [
                     'model' => $roomMembersForm,
                     'users' => $users,
                     'roomId' => $room->id
