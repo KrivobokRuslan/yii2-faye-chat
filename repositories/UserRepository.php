@@ -25,6 +25,6 @@ class UserRepository
 
     public function getUsersByIds($ids): array
     {
-        return User::find()->where(['in', 'user_id', $ids])->all();
+        return User::find()->where(['in', 'id', $ids])->all();
     }
 }
