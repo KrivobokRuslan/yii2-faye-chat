@@ -34,9 +34,12 @@ class RoomController extends MainController
 
     public function actionView($roomId)
     {
+        $roomMembersForm = new RoomMembersForm();
         return $this->renderPartial('room', [
             'room' => $this->service->view($roomId, \Yii::$app->user->id),
-            'userId' => \Yii::$app->user->id
+            'userId' => \Yii::$app->user->id,
+            'users' => $this->service->usersList(),
+            'roomMembersForm' => $roomMembersForm
         ]);
     }
 
@@ -72,5 +75,10 @@ class RoomController extends MainController
         } catch (\DomainException $e) {
             return $this->setErrorStatus($e->getMessage());
         }
+    }
+
+    public function actionAddMembers($roomId)
+    {
+
     }
 }

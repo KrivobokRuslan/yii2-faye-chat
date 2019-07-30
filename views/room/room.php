@@ -3,6 +3,8 @@
  * @var \yii\web\View $this
  * @var \krivobokruslan\fayechat\converted\Room $room
  * @var string $userId
+ * @var \krivobokruslan\fayechat\forms\RoomMembersForm $roomMembersForm
+ * @var \krivobokruslan\fayechat\entities\User[] $users
  */
 
 ?>
@@ -11,12 +13,18 @@
     <li class="nav-item active">
         <a class="nav-link active" data-toggle="tab" role="tab" aria-controls="user-container" aria-selected="true" href="#room-content-<?php echo $room->id; ?>">Сообщения</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" role="tab" aria-controls="group-container" aria-selected="false" href="#room-members-<?php echo $room->id; ?>">
-            Участники
-            <span class="glyphicon glyphicon-plus"></span>
-        </a>
-    </li>
+    <?php if($room->isOwner($userId)) : ?>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" role="tab" aria-controls="group-container" aria-selected="false" href="#room-members-<?php echo $room->id; ?>">
+                Участники
+                <?php echo $this->render('_add_members_modal', [
+                    'model' => $roomMembersForm,
+                    'users' => $users,
+                    'roomId' => $room->id
+                ]); ?>
+            </a>
+        </li>
+    <?php endif; ?>
 </ul>
 <div class="tab-content" id="chatsTabContent">
     <div role="tabpanel" aria-labelledby="room-message-tab" class="panel panel-default tab-pane fade active in" id="room-content-<?php echo $room->id; ?>">

@@ -174,4 +174,22 @@ $(document).ready(function(){
         });
         return false;
     });
+
+    $(document).on('submit', '#roomMembersForm', function() {
+        var roomId = $(this).attr('data-room-id');
+        $.ajax({
+            url: '/chat/room/' + roomId + '/add-members',
+            type: 'post',
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.status) {
+                    $('#createRoomModal').modal('hide');
+                    $('#roomCreateForm').get(0).reset();
+                } else {
+                    alert(response.error);
+                }
+            }
+        });
+        return false;
+    });
 });

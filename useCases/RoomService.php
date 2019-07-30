@@ -13,6 +13,7 @@ use krivobokruslan\fayechat\repositories\RoomMessageRepository;
 use krivobokruslan\fayechat\repositories\RoomRepository;
 use krivobokruslan\fayechat\repositories\RoomRoleRepository;
 use krivobokruslan\fayechat\converted\Room as cRoom;
+use krivobokruslan\fayechat\repositories\UserRepository;
 
 class RoomService
 {
@@ -22,6 +23,7 @@ class RoomService
     private $socketService;
     private $messages;
     private $roleManager;
+    private $users;
 
     public function __construct(
         RoomRepository $rooms,
@@ -29,7 +31,8 @@ class RoomService
         TransactionManager $transactions,
         SocketServiceInterface $socketService,
         RoomMessageRepository $messages,
-        RoleManager $roleManager
+        RoleManager $roleManager,
+        UserRepository $users
     )
     {
         $this->rooms = $rooms;
@@ -38,6 +41,7 @@ class RoomService
         $this->socketService = $socketService;
         $this->messages = $messages;
         $this->roleManager = $roleManager;
+        $this->users = $users;
     }
 
     public function create(RoomForm $form, $ownerId): Room
@@ -158,4 +162,9 @@ class RoomService
 //        \Yii::$app->roleManager->assignRole($roomId, $form->member_id, $role->id);
 //        \Yii::$app->faye->send(new RoomRoleAdvanced($role), '/room/'.$room->id.'/role/'.$form->member_id);
 //    }
+
+    public function usersList(): array
+    {
+        return $this->users->findAll();
+    }
 }
