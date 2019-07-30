@@ -75,26 +75,25 @@ class RoomService
 //        return $this->rooms->getByApplicationForUser($appIdentifier, $user->user_id);
 //    }
 
-//    public function addMembers(RoomMembersForm $form, $roomId, $userId): UserDataProvider
-//    {
-//        $memberRole = $this->roles->getRoleBySlug(RoomRole::ROLE_MEMBER);
-//        $room = $this->rooms->getById($roomId);
-//        if (!$room->isOwner($userId)){
-//            $room->checkPermissionMember($userId, RoomRole::MEMBER_ADD);
-//        }
-//        foreach ($form->members as $member) {
-//            $room->attachMember($member, $memberRole->id);
-//        }
-//        $this->transaction->wrap(function() use ($room, $form) {
-//            $this->rooms->save($room);
-//            foreach ($form->members as $member) {
-//                \Yii::$app->faye->send(new RoomList($room), '/contacts/' . $member . '/add-to-room');
-//            }
-//            \Yii::$app->faye->send($this->users->getUsersByIds($form->members), '/room/' . $room->id . '/add-members');
-//        });
-//
-//        return new UserDataProvider(['query' => User::find()->where(['in', 'user_id', $form->members])]);
-//    }
+    public function addMembers(RoomMembersForm $form, $roomId, $userId)
+    {
+        $memberRole = $this->roles->getRoleBySlug(RoomRole::ROLE_MEMBER);
+        $room = $this->rooms->getById($roomId);
+        if (!$room->isOwner($userId)){
+            throw new \DomainException('У Вас недостаточно прав');
+        }
+        foreach ($form->members as $member) {
+            $room->attachMember($member, $memberRole->id);
+        }
+        $oldMembers = $room->members;
+        $this->rooms->save($room);
+        foreach ($form->members as $member) {
+            $this->socketService->send('', ['event' => 'addToRoom', 'room' => new cRoom($room), 'userId' => $member]);
+        }
+        foreach ($oldMembers as $oMember) {
+            $this->socketService->send('', ['event' => 'newRoomMember', 'members' => $this->users->getUsersByIds($form->members), 'userId' => $oMember->id]);
+        }
+    }
 
     public function leave($id, $userId): void
     {

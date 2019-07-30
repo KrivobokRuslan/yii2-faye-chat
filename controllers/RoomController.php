@@ -35,7 +35,7 @@ class RoomController extends MainController
     public function actionView($roomId)
     {
         $roomMembersForm = new RoomMembersForm();
-        return $this->renderPartial('room', [
+        return $this->renderAjax('room', [
             'room' => $this->service->view($roomId, \Yii::$app->user->id),
             'userId' => \Yii::$app->user->id,
             'users' => $this->service->usersList(),
@@ -79,6 +79,16 @@ class RoomController extends MainController
 
     public function actionAddMembers($roomId)
     {
+        $form = new RoomMembersForm();
 
+        if ($form->load(\Yii::$app->request->getBodyParams(), '') && $form->validate()) {
+            try {
+                $this->service->addMembers($form, $roomId, \Yii::$app->user->id);
+                return $this->setSuccessStatus();
+            } catch (\DomainException $e) {
+                return $this->setErrorStatus($e->getMessage());
+            }
+        }
+        return $this->setErrorStatus('Выберите пользователей');
     }
 }

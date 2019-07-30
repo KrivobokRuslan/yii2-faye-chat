@@ -22,4 +22,9 @@ class UserRepository
             throw new \DomainException('Saving error');
         }
     }
+
+    public function getUsersByIds($ids): array
+    {
+        return User::find()->where(['in', 'user_id', $ids])->all();
+    }
 }

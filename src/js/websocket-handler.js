@@ -63,6 +63,24 @@
                 }
             });
         },
+        addToRoom : function(data) {
+            var template = $('#group-container #group-template').clone().prop('id', 'room-' + data.room.id).attr('data-room-id', data.room.id);
+            template.find('.username').text(data.room.title);
+            template.find('.members-count').text(data.room.countMembers);
+            template.find('.income-message').attr('id', 'income-message-room-' + data.room.id);
+            if (el == data.room.owner_user_id) {
+                template.find('.room-delete').attr('data-room-id', data.room.id);
+                template.find('.room-leave').attr('data-room-id', data.room.id).hide();
+            } else {
+                template.find('.room-delete').attr('data-room-id', data.room.id).hide();
+                template.find('.room-leave').attr('data-room-id', data.room.id);
+            }
+            $('#group-container').append(template);
+            template.show();
+        },
+        newRoomMember : function(data) {
+            console.log(data);
+        },
         newRoomMessage : function(data) {
             var roomElem = $('#room-content-' + data.message.room_id);
             if (!isEmpty(roomElem) && currentUser != data.message.author.id) {
