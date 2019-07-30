@@ -12,6 +12,7 @@ class RoomMembersForm extends Model
     public function rules()
     {
         return [
+            [['members'], 'required'],
             [
                 'members', 'each', 'rule' => [
                     'exist', 'targetClass' => User::class, 'targetAttribute' => 'id'

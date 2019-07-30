@@ -36,7 +36,7 @@ use kartik\select2\Select2;
                                 'allowClear' => true
                             ],
                         ]); ?>
-                        <button type="submit" class="btn btn-success">Создать</button>
+                        <button type="submit" class="btn btn-success">Добавить</button>
                         <?php \yii\widgets\ActiveForm::end();?>
                     </div>
                 </div>
