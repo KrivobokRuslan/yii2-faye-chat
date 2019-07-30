@@ -56,7 +56,7 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
     <div role="tabpanel" aria-labelledby="room-member-tab" class="panel panel-default tab-pane fade" id="room-members-<?php echo $room->id; ?>">
         <div class="panel-body direct-chat-primary">
             <ul class="list-group" style="list-style: none outside none">
-                <li class="user-row" id="member-remplate" data-user-id="" style="display: none;">
+                <li class="user-row" id="member-template" data-user-id="" style="display: none;">
                     <div class="user-panel">
                         <div class="pull-left image">
                             <img src="<?php echo $bundle->baseUrl . '/img/no-avatar.png'; ?>" width="50px" height="50px">
