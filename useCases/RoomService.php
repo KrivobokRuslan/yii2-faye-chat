@@ -91,7 +91,7 @@ class RoomService
             $this->socketService->send('', ['event' => 'addToRoom', 'room' => new cRoom($room), 'userId' => $member]);
         }
         foreach ($oldMembers as $oMember) {
-            $this->socketService->send('', ['event' => 'newRoomMember', 'members' => $this->users->getUsersByIds($form->members), 'userId' => $oMember->id]);
+            $this->socketService->send('', ['event' => 'newRoomMember', 'isOwner' => $room->isOwner($oMember), 'countMembers' => $room->getCountMembers(), 'roomId' => $room->id, 'members' => $this->users->getUsersByIds($form->members), 'userId' => $oMember->id]);
         }
     }
 

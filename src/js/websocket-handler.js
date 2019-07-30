@@ -74,7 +74,31 @@
             template.show();
         },
         newRoomMember : function(data) {
-            console.log(data);
+            var roomInList = $('#room-' + data.roomId);
+            var roomEl = $('#chatsTabContent');
+            if (!isEmpty(roomInList)) {
+                roomInList.find('.members-count').text(data.countMembers);
+            }
+            if (!isEmpty(roomEl)) {
+                data.members.forEach(function(el) {
+                    var memberTemplate = $('#member-template').clone().prop('id', 'user-in-room-' + el.id).attr('data-user-id', el.id);
+                    if (el.avatar) {
+                        memberTemplate.find('img').attr('src', el.avatar);
+                    }
+                    memberTemplate.find('.username').text(el.username);
+                    if (!el.isOwner) {
+                        memberTemplate.find('.room-member-remove').remove();
+                    } else {
+                        memberTemplate.find('.room-member-remove').attr('data-user-id', el.id).attr('data-room-id', data.roomId);
+                    }
+                    var uElem = $('#user-' + el.id + ' .user-status.online');
+                    if (!isEmpty(uElem)) {
+                        memberTemplate.find('.user-status.offline').removeClass('offline').addClass('online');
+                        memberTemplate.find('.text-status').text('Online');
+                    }
+                    roomEl.find('#room-members-' + data.roomId + ' .list-group').append(memberTemplate);
+                });
+            }
         },
         newRoomMessage : function(data) {
             var roomElem = $('#room-content-' + data.message.room_id);

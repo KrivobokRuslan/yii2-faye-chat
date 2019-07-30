@@ -55,6 +55,26 @@
     <div role="tabpanel" aria-labelledby="room-member-tab" class="panel panel-default tab-pane fade" id="room-members-<?php echo $room->id; ?>">
         <div class="panel-body direct-chat-primary">
             <ul class="list-group" style="list-style: none outside none">
+                <li class="user-row" id="member-remplate" data-user-id="" style="display: none;">
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="<?php echo $bundle->baseUrl . '/img/no-avatar.png'; ?>" width="50px" height="50px">
+                        </div>
+                        <div class="pull-left info">
+                            <p><span class="username"></span></p>
+                            <span class="user-status offline"></span>
+                            <span class="text-status">Offline</span>
+                        </div>
+                    </div>
+                    <div
+                            class="room-member-remove btn btn-danger"
+                            style="float: right;"
+                            data-user-id=""
+                            data-room-id=""
+                    >
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                    </div>
+                </li>
                 <?php
                 if (!empty($room->members)) {
                     foreach ($room->members as $member) {
