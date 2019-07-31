@@ -158,6 +158,52 @@ $(document).ready(function(){
         });
     });
 
+    function sendMessageToRoom(event) {
+        if (event.keyCode == 13) {
+            var roomId = $(this).closest('.input-group').find('#room-id').val();
+            var message = $(this).closest('.input-group').find('#new-message').val();
+            $(this).closest('.input-group').find('#new-message').val('');
+            $.ajax({
+                method: 'post',
+                url: '/room/' + roomId + '/send',
+                data: {
+                    room_id : roomId,
+                    message: message
+                },
+                success: function(res) {
+                    $('.no-messages').remove();
+                    $('#message-container').append(res);
+                    $('#message-container').animate({
+                        scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
+                    }, 'fast');
+                }
+            });
+        }
+    }
+
+    function sendMessage(event) {
+        if (event.keyCode == 13) {
+            var dialogId = $(this).closest('.input-group').find('#dialog-id').val();
+            var message = $(this).closest('.input-group').find('#new-message').val();
+            $(this).closest('.input-group').find('#new-message').val('');
+            $.ajax({
+                method: 'post',
+                url: '/chat/' + dialogId + '/send',
+                data: {
+                    dialog_id : dialogId,
+                    message: message
+                },
+                success: function(res) {
+                    $('.no-messages').remove();
+                    $('#message-container').append(res);
+                    $('#message-container').animate({
+                        scrollTop: $('#message-container').find('.direct-chat-msg:last-child').offset().top + 'px'
+                    }, 'fast');
+                }
+            });
+        }
+    }
+
     $(document).on('submit', '#roomCreateForm', function() {
         $.ajax({
             url: '/chat/room',

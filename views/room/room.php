@@ -45,11 +45,11 @@ $bundle = $this->getAssetManager()->getBundle(\krivobokruslan\fayechat\assets\Ch
         </div>
         <div class="panel-footer">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Message..." id="new-message">
+                <input type="text" class="form-control" onkeyup="sendMessageToRoom()" placeholder="Message..." id="new-message">
                 <input type="hidden" id="room-id" value="<?php echo $room->id;?>">
                 <span class="input-group-btn">
-            <button class="btn btn-default" type="button" id="room-send-new-message">Send</button>
-        </span>
+                    <button class="btn btn-default" type="button" id="room-send-new-message">Send</button>
+                </span>
             </div>
         </div>
     </div>
