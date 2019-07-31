@@ -158,7 +158,7 @@ $(document).ready(function(){
         });
     });
 
-    function sendMessageToRoom(event) {
+    $(document).on('keyup', '#new-message.room-message', function(event) {
         if (event.keyCode == 13) {
             var roomId = $(this).closest('.input-group').find('#room-id').val();
             var message = $(this).closest('.input-group').find('#new-message').val();
@@ -179,9 +179,9 @@ $(document).ready(function(){
                 }
             });
         }
-    }
+    });
 
-    function sendMessage(event) {
+    $(document).on('keyup', '#new-message.dialog-message', function(event) {
         if (event.keyCode == 13) {
             var dialogId = $(this).closest('.input-group').find('#dialog-id').val();
             var message = $(this).closest('.input-group').find('#new-message').val();
@@ -202,7 +202,7 @@ $(document).ready(function(){
                 }
             });
         }
-    }
+    });
 
     $(document).on('submit', '#roomCreateForm', function() {
         $.ajax({

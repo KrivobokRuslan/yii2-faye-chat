@@ -22,7 +22,7 @@
     </div>
     <div class="panel-footer">
         <div class="input-group">
-            <input type="text" class="form-control" onkeyup="sendMessage()" placeholder="Message..." id="new-message">
+            <input type="text" class="form-control dialog-message" placeholder="Message..." id="new-message">
             <input type="hidden" id="dialog-id" value="<?php echo $dialog->id;?>">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button" id="send-new-message">Send</button>
